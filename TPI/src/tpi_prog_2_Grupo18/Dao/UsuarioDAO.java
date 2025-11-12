@@ -38,47 +38,50 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
             = "SELECT id_usuario, username, nombre, apellido, email, fecha_registro, activo, estado "
             + "FROM usuario WHERE eliminado = FALSE AND email = ?";
 
-    @Override
-    public void insertar(Usuario usuario) throws Exception {
-        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
+ @Override
+public void insertar(Usuario usuario) throws Exception {
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setString(1, usuario.getUsername());
-            stmt.setString(2, usuario.getNombre());
-            stmt.setString(3, usuario.getApellido());
-            stmt.setString(4, usuario.getEmail());
-            stmt.setBoolean(5, usuario.isActivo()); // ahora sí funciona
-            stmt.setString(6, usuario.getEstado());
+        stmt.setString(1, usuario.getUsername());
+        stmt.setString(2, usuario.getNombre());
+        stmt.setString(3, usuario.getApellido());
+        stmt.setString(4, usuario.getEmail());
+        stmt.setBoolean(5, usuario.isActivo());
+        stmt.setString(6, usuario.getEstado());
 
-            stmt.executeUpdate();
+        stmt.executeUpdate();
 
-            try (ResultSet rs = stmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    usuario.setIdUsuario(rs.getInt(1));
-                }
+        try (ResultSet rs = stmt.getGeneratedKeys()) {
+            if (rs.next()) {
+                usuario.setId(rs.getInt(1)); // corregido
             }
         }
     }
+}
 
-    @Override
-    public void insertTx(Usuario usuario, Connection conn) throws Exception {
-        try (PreparedStatement stmt = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setString(1, usuario.getUsername());
-            stmt.setString(2, usuario.getNombre());
-            stmt.setString(3, usuario.getApellido());
-            stmt.setString(4, usuario.getEmail());
-            stmt.setBoolean(5, usuario.isActivo());
-            stmt.setString(6, usuario.getEstado());
+   @Override
+public void insertTx(Usuario usuario, Connection conn) throws Exception {
+    try (PreparedStatement stmt = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.executeUpdate();
+        stmt.setString(1, usuario.getUsername());
+        stmt.setString(2, usuario.getNombre());
+        stmt.setString(3, usuario.getApellido());
+        stmt.setString(4, usuario.getEmail());
+        stmt.setBoolean(5, usuario.isActivo());
+        stmt.setString(6, usuario.getEstado());
 
-            try (ResultSet rs = stmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    usuario.setIdUsuario(rs.getInt(1));
-                }
+        stmt.executeUpdate();
+
+        try (ResultSet rs = stmt.getGeneratedKeys()) {
+            if (rs.next()) {
+                usuario.setId(rs.getInt(1)); // corregido
             }
         }
     }
+}
+
 
     @Override
     public void actualizar(Usuario usuario) throws Exception {

@@ -7,34 +7,23 @@ package tpi_prog_2_Grupo18.Models;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-/**
- *
- * @author Grupo18
- */
 public class Credencial extends Base {
 
-    //Estado de la credencial: ACTIVO o INACTIVO
-    private EstadoCredencial estado;
+    // Estado de la credencial como texto: "ACTIVO" o "INACTIVO"
+    private String estado;
 
     private LocalDateTime ultimaSesion;
-
     private String hashPassword;
-
     private String salt;
-
     private LocalDateTime ultimoCambio;
-
-    //boolean que indica si el usuario debe resetear su contraseña
     private Boolean requiereReset;
-
-    //Relación 1→1 con Usuario 
     private Usuario usuario;
 
     // Constructor completo
-    public Credencial(int id, EstadoCredencial estado, LocalDateTime ultimaSesion,
-            String hashPassword, String salt,
-            LocalDateTime ultimoCambio, Boolean requiereReset,
-            Usuario usuario) {
+    public Credencial(int id, String estado, LocalDateTime ultimaSesion,
+                      String hashPassword, String salt,
+                      LocalDateTime ultimoCambio, Boolean requiereReset,
+                      Usuario usuario) {
         super(id, false);
         this.estado = estado;
         this.ultimaSesion = ultimaSesion;
@@ -51,85 +40,46 @@ public class Credencial extends Base {
     }
 
     // Getters y Setters
-    public EstadoCredencial getEstado() {
-        return estado;
-    }
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
 
-    public void setEstado(EstadoCredencial estado) {
-        this.estado = estado;
-    }
+    public LocalDateTime getUltimaSesion() { return ultimaSesion; }
+    public void setUltimaSesion(LocalDateTime ultimaSesion) { this.ultimaSesion = ultimaSesion; }
 
-    public LocalDateTime getUltimaSesion() {
-        return ultimaSesion;
-    }
+    public String getHashPassword() { return hashPassword; }
+    public void setHashPassword(String hashPassword) { this.hashPassword = hashPassword; }
 
-    public void setUltimaSesion(LocalDateTime ultimaSesion) {
-        this.ultimaSesion = ultimaSesion;
-    }
+    public String getSalt() { return salt; }
+    public void setSalt(String salt) { this.salt = salt; }
 
-    public String getHashPassword() {
-        return hashPassword;
-    }
+    public LocalDateTime getUltimoCambio() { return ultimoCambio; }
+    public void setUltimoCambio(LocalDateTime ultimoCambio) { this.ultimoCambio = ultimoCambio; }
 
-    public void setHashPassword(String hashPassword) {
-        this.hashPassword = hashPassword;
-    }
+    public Boolean getRequiereReset() { return requiereReset; }
+    public void setRequiereReset(Boolean requiereReset) { this.requiereReset = requiereReset; }
 
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public LocalDateTime getUltimoCambio() {
-        return ultimoCambio;
-    }
-
-    public void setUltimoCambio(LocalDateTime ultimoCambio) {
-        this.ultimoCambio = ultimoCambio;
-    }
-
-    public Boolean getRequiereReset() {
-        return requiereReset;
-    }
-
-    public void setRequiereReset(Boolean requiereReset) {
-        this.requiereReset = requiereReset;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
 
     @Override
     public String toString() {
-        return "Credencial{"
-                + "id=" + getId()
-                + ", estado='" + estado + '\''
-                + ", ultimaSesion=" + ultimaSesion
-                + ", hashPassword='" + hashPassword + '\''
-                + ", salt='" + salt + '\''
-                + ", ultimoCambio=" + ultimoCambio
-                + ", requiereReset=" + requiereReset
-                + ", usuario=" + (usuario != null ? usuario.getId() : null)
-                + ", eliminado=" + isEliminado()
-                + '}';
+        return "Credencial{" +
+                "id=" + getId() +
+                ", estado='" + estado + '\'' +
+                ", ultimaSesion=" + ultimaSesion +
+                ", hashPassword='" + hashPassword + '\'' +
+                ", salt='" + salt + '\'' +
+                ", ultimoCambio=" + ultimoCambio +
+                ", requiereReset=" + requiereReset +
+                ", usuario=" + (usuario != null ? usuario.getId() : null) +
+                ", eliminado=" + isEliminado() +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Credencial)) {
-            return false;
-        }
+        if (this == o) return true;
+        if (!(o instanceof Credencial)) return false;
         Credencial that = (Credencial) o;
         return Objects.equals(usuario, that.usuario);
     }

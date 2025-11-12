@@ -9,9 +9,7 @@ package tpi_prog_2_Grupo18.Dao;
  * @author Matias
  */
 
-
 import tpi_prog_2_Grupo18.Models.Credencial;
-import tpi_prog_2_Grupo18.Models.EstadoCredencial;
 import tpi_prog_2_Grupo18.Models.Usuario;
 import tpi_prog_2_Grupo18.Util.PasswordUtil;
 import tpi_prog_2_Grupo18.Config.DatabaseConnection;
@@ -41,7 +39,7 @@ public class CredencialDAO {
     /**
      * Inserta una nueva credencial para un usuario con hash + salt.
      */
-    public void insertarCredencial(Usuario usuario, String password, EstadoCredencial estado) throws Exception {
+    public void insertarCredencial(Usuario usuario, String password, String estado) throws Exception {
         String salt = PasswordUtil.generarSalt();
         String hash = PasswordUtil.hashPassword(password, salt);
 
@@ -49,7 +47,7 @@ public class CredencialDAO {
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
 
             stmt.setInt(1, usuario.getId());
-            stmt.setString(2, estado.name());
+            stmt.setString(2, estado); // ahora String
             stmt.setString(3, hash);
             stmt.setString(4, salt);
             stmt.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
@@ -69,7 +67,7 @@ public class CredencialDAO {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(UPDATE_SQL)) {
 
-            stmt.setString(1, EstadoCredencial.ACTIVO.name()); // o el estado que corresponda
+            stmt.setString(1, "ACTIVO"); // estado como String
             stmt.setString(2, hash);
             stmt.setString(3, salt);
             stmt.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
@@ -142,7 +140,7 @@ public class CredencialDAO {
                 if (rs.next()) {
                     Credencial c = new Credencial();
                     c.setId(rs.getInt("id_credencial"));
-                    c.setEstado(EstadoCredencial.valueOf(rs.getString("estado")));
+                    c.setEstado(rs.getString("estado")); // ahora String
                     c.setUltimaSesion(rs.getTimestamp("ultima_sesion") != null ?
                             rs.getTimestamp("ultima_sesion").toLocalDateTime() : null);
                     c.setHashPassword(rs.getString("hash_password"));
