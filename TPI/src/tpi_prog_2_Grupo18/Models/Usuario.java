@@ -7,15 +7,9 @@ package tpi_prog_2_Grupo18.Models;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-
-/**
- *
- * @author Grupo18
- */
 public class Usuario extends Base {
 
     private String username;
-
     private String nombre;
     private String apellido;
     private String email;
@@ -24,8 +18,8 @@ public class Usuario extends Base {
     private String estado;
 
     public Usuario(int id, String username, String nombre, String apellido,
-            String email, LocalDateTime fechaRegistro,
-            Boolean activo, String estado) {
+                   String email, LocalDateTime fechaRegistro,
+                   Boolean activo, String estado) {
         super(id, false); // eliminado = false por defecto
         this.username = username;
         this.nombre = nombre;
@@ -35,12 +29,12 @@ public class Usuario extends Base {
         this.activo = activo;
         this.estado = estado;
     }
-    
-       public Usuario() {
+
+    public Usuario() {
         super();
     }
-       
-           // Getters y Setters
+
+    // Getters y Setters
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
 
@@ -56,12 +50,12 @@ public class Usuario extends Base {
     public LocalDateTime getFechaRegistro() { return fechaRegistro; }
     public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
 
-    public Boolean getActivo() { return activo; }
+    // Getter estilo boolean
+    public boolean isActivo() { return activo != null && activo; }
     public void setActivo(Boolean activo) { this.activo = activo; }
 
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
-
 
     @Override
     public String toString() {
@@ -77,11 +71,7 @@ public class Usuario extends Base {
                 ", eliminado=" + isEliminado() +
                 '}';
     }
-    
-    
-     
-     //Compara dos usuarios por username y email (ambos únicos en BD).
-     
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,8 +85,4 @@ public class Usuario extends Base {
     public int hashCode() {
         return Objects.hash(username, email);
     }
-
-    
-
-
 }
