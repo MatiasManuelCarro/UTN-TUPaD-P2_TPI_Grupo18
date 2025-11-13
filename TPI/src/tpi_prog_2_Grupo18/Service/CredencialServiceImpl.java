@@ -26,7 +26,7 @@ public void insertarCredencial(Usuario usuario, String password, String estado) 
     String salt = PasswordUtil.generarSalt();
     String hash = PasswordUtil.hashPassword(password, salt);
 
-    String sql = "INSERT INTO credenciales (usuario_id, hash_password, salt, estado, requiere_reset) VALUES (?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO credencial_acceso (usuario_id, hash_password, salt, estado, requiere_reset) VALUES (?, ?, ?, ?, ?)";
     try (PreparedStatement ps = connection.prepareStatement(sql)) {
         ps.setInt(1, usuario.getId());
         ps.setString(2, hash);
@@ -39,7 +39,7 @@ public void insertarCredencial(Usuario usuario, String password, String estado) 
     // Listar todas las credenciales
     public List<Credencial> getAll() throws Exception {
         List<Credencial> lista = new ArrayList<>();
-        String sql = "SELECT * FROM credenciales";
+        String sql = "SELECT * FROM credencial_acceso";
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -59,7 +59,7 @@ public void insertarCredencial(Usuario usuario, String password, String estado) 
         String salt = PasswordUtil.generarSalt();
         String hash = PasswordUtil.hashPassword(newPassword, salt);
 
-        String sql = "UPDATE credenciales SET hash_password = ?, salt = ?, requiere_reset = ?, ultimo_cambio = NOW() WHERE usuario_id = ?";
+        String sql = "UPDATE credencial_acceso SET hash_password = ?, salt = ?, requiere_reset = ?, ultimo_cambio = NOW() WHERE usuario_id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, hash);
             ps.setString(2, salt);
@@ -71,7 +71,7 @@ public void insertarCredencial(Usuario usuario, String password, String estado) 
 
     // Obtener credencial por usuario
     public Credencial getCredencialByUsuarioId(Usuario usuario) throws Exception {
-        String sql = "SELECT * FROM credenciales WHERE usuario_id = ?";
+        String sql = "SELECT * FROM credencial_acceso WHERE usuario_id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, usuario.getId());
             try (ResultSet rs = ps.executeQuery()) {

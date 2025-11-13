@@ -47,25 +47,41 @@ public class MenuHandler {
 
 private void crearUsuario() {
     try {
+        System.out.print("Ingrese username: ");
+        String username = scanner.nextLine();
+
         System.out.print("Ingrese nombre: ");
         String nombre = scanner.nextLine();
 
         System.out.print("Ingrese apellido: ");
         String apellido = scanner.nextLine();
 
+        System.out.print("Ingrese email: ");
+        String email = scanner.nextLine();
+
         System.out.print("Ingrese contraseña: ");
         String password = scanner.nextLine();
 
         Usuario nuevo = new Usuario();
+        nuevo.setUsername(username);
         nuevo.setNombre(nombre);
         nuevo.setApellido(apellido);
+        nuevo.setEmail(email);
+        nuevo.setActivo(true);
+        nuevo.setEstado("ACTIVO");
 
+        // Paso 1: insertar usuario
         usuarioService.insertarUsuario(nuevo, password, "ACTIVO");
-        System.out.println("Usuario creado correctamente.");
+
+        // Paso 2: insertar credencial asociada
+        credencialService.insertarCredencial(nuevo, password, "ACTIVO");
+
+        System.out.println("Usuario y credencial creados correctamente.");
     } catch (Exception e) {
         System.err.println("Error al crear usuario: " + e.getMessage());
     }
 }
+
 
 
     private void mostrarUsuarios() {

@@ -23,7 +23,6 @@ public class UsuarioServiceImpl {
         usuario.setEstado(estado);
         usuario.setActivo(true);
         usuarioDAO.insertar(usuario);
-        // acá podrías también crear la credencial asociada con CredencialServiceImpl
     }
 
     // Listar todos
