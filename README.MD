@@ -279,3 +279,71 @@ Las credenciales: 12345
 # Windows
 mvn clean compile
 mvn clean package
+
+
+3. Configurar Conexión (Opcional)
+
+Por defecto conecta a:
+
+    Host: localhost:3306
+    Base de datos: dbtpi3
+    Usuario: root
+    Contraseña: (vacía)
+
+- Para cambiar la configuración (en el uso del proyecto ) ir dentro del proyecto a:
+
+src/main/resources y modificar el archivo "db.properties"
+
+> \src\main\resources\db.properties
+
+    ------------------------------
+    CONFIGURACION BASE DE DATOS
+    ------------------------------
+    
+    Host del servidor MySQL (ej: 127.0.0.1 o localhost)
+    db.host=127.0.0.1
+    
+    Puerto del servidor MySQL (por defecto 3306)
+    db.port=3306
+    
+    Nombre de la conexion / base de datos
+    db.name=tpi_prog_2
+    
+    Usuario y contrase\u00f1a
+    jdbc.user=root
+    jdbc.pass=1234
+    
+    Driver JDBC de MySQL
+    db.driver=com.mysql.cj.jdbc.Driver
+
+
+- Para cambiar la configuracion y ejecutar el proyecto compilado ir a:
+
+> target\classes\db.properties
+
+Y modificar el archivo de la misma manera
+
+
+## Uso del Sistema
+
+### Menú Principal
+
+```
+========= MENU TFI (Usuario / Credencial) =========
+ 1) Crear Usuario (simple)
+ 2) Listar Usuarios
+ 3) Ver Usuario por ID
+ 4) Buscar Usuario por USERNAME
+ 5) Buscar Usuario por EMAIL
+ 6) Actualizar Usuario
+ 7) Eliminar Usuario (baja logica)
+ 8) Eliminar Usuario (baja fisica)
+ 9) Crear Usuario + Credencial (TRANSACCIÓN)
+10) Crear Credencial para Usuario existente
+11) Ver Credencial por ID
+12) Ver Credencial por usuarioId
+13) Actualizar password (stored procedure)
+14) Login de Usuario (validar password)
+ 0) Salir
+```
+

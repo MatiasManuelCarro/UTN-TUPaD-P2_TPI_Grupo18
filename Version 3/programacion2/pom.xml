@@ -58,6 +58,9 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <!-- Esto hace que se cree un jar separado con sufijo -shaded -->
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedClassifierName>shaded</shadedClassifierName>
                             <transformers>
                                 <!-- Define la clase principal -->
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
