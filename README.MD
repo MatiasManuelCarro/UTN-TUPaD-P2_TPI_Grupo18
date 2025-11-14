@@ -575,6 +575,47 @@ Password: 12345
 - **Main.java**: Punto de entrada de la aplicación, inicializa configuración y menú.
 
 
+## Estructura de Directorios
+
+TPI-Prog2-fusion-final/
+├── src/main/java/
+│   ├── integradorfinal/programacion2/config/        # Configuración de BD
+│   │   ├── Config.java
+│   │   └── DatabaseConnection.java
+│   │
+│   ├── integradorfinal/programacion2/dao/           # Interfaces DAO
+│   │   ├── GenericDao.java
+│   │   ├── UsuarioDao.java
+│   │   └── CredencialAccesoDao.java
+│   │
+│   ├── integradorfinal/programacion2/dao/impl/      # Implementaciones DAO
+│   │   ├── UsuarioDaoImpl.java
+│   │   └── CredencialAccesoDaoImpl.java
+│   │
+│   ├── integradorfinal/programacion2/entities/      # Entidades de dominio
+│   │   ├── Usuario.java
+│   │   ├── CredencialAcceso.java
+│   │   └── Estado.java
+│   │
+│   ├── integradorfinal/programacion2/exceptions/    # Manejo de excepciones
+│   │   └── DataAccessException.java
+│   │
+│   ├── integradorfinal/programacion2/service/       # Interfaces de servicios
+│   │   ├── GenericService.java
+│   │   ├── UsuarioService.java
+│   │   └── CredencialAccesoService.java
+│   │
+│   ├── integradorfinal/programacion2/service/impl/  # Implementaciones de servicios
+│   │   ├── UsuarioServiceImpl.java
+│   │   └── CredencialAccesoServiceImpl.java
+│   │
+│   ├── integradorfinal/programacion2/util/          # Utilidades
+│   │   └── PasswordUtil.java
+│   │
+│   ├── integradorfinal/programacion2app/            # Punto de entrada y menú
+│   │   ├── Main.java
+│   │   └── AppMenu.java
+
 
 
 ---
