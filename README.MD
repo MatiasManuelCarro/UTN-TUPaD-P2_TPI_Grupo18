@@ -340,9 +340,9 @@ Desde la carpeta root del proyecto se puede ejecutar el siguiente Script
 
 > COMPILAR Y EJECUTAR.bat
 
-O si ya lo compilaste, podes ejecutarlo solamente: 
+O si ya lo compilaste, podes ejecutarlo solamente usando este script, sin la necesidad de recompilar: 
 
-> EJECUTAR.BAT
+> Ejecutar_una_vez_compilado.bat
 
 - Nota: Este script permite que funcione correctamente UTF - 8
 
@@ -386,8 +386,8 @@ y ejecutar:
  8) Eliminar Usuario (baja fisica)
  9) Crear Usuario + Credencial (TRANSACCIÓN)
 10) Crear Credencial para Usuario existente
-11) Ver Credencial por ID
-12) Ver Credencial por usuarioId
+11) Ver Credencial por usuarioId
+12) Ver Datos de Credencial por ID (de la credencial)
 13) Actualizar password (stored procedure)
 14) Login de Usuario (validar password)
  0) Salir
@@ -502,13 +502,48 @@ Password (se guardara el hash SHA-256): 12345
 
 ### 10. Crear Credencial para Usuario existente
 
-- Crea una contraseña para un usuario nuevo, que se haya creado sin contraseña (para darle el alta a la cuenta)
+- Crea una contraseña para un usuario nuevo, que se haya creado sin contraseña (para darle el alta a la cuenta en otra fecha mas adelante)
 
-### 11. Ver Credencial por ID
+- Se selecciona el usuario utilizando ID
 
-### 12. Ver Credencial por usuarioId
+Ejemplo:
+
+```
+Opcion: 10
+Usuario ID para asociar credencial: 7
+Password (se guardará el hash SHA-256): 12345
+✅ Conectado correctamente a la base de datos.
+Credencial creada con id=7
+```
+
+### 11. Ver Credencial por usuarioId
 
 - Muestra el estado de la credencial (no muestra datos importantes por seguridad)
+
+- Utiliza el ID de Usuario
+
+Ejemplo:
+
+```
+Opcion: 11
+Usuario ID: 1
+✅ Conectado correctamente a la base de datos.
+CredencialAcceso{idCredencial=1, usuarioId=1, estado=ACTIVO, requiereReset=false}
+```
+
+### 12. Ver Datos de Credencial por ID (de la credencial)
+
+- Muestra el estado de la credencial, utilizando el ID de la credencial.
+- (Podes encontrarlo listando usuario o usando la opcion 11)
+
+Ejemplo:
+
+```
+Opcion: 12
+ID de credencial: 1
+✅ Conectado correctamente a la base de datos.
+CredencialAcceso{idCredencial=1, usuarioId=1, estado=ACTIVO, requiereReset=false}
+```
 
 Ejemplo:
  

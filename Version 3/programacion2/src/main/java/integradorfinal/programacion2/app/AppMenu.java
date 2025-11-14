@@ -31,22 +31,38 @@ public class AppMenu {
             op = leerInt("Opcion");
             try {
                 switch (op) {
-                    case 1 -> crearUsuarioSimple();
-                    case 2 -> listarUsuarios();
-                    case 3 -> verUsuarioPorId();
-                    case 4 -> buscarUsuarioPorUsername();
-                    case 5 -> buscarUsuarioPorEmail();
-                    case 6 -> actualizarUsuario();
-                    case 7 -> bajaLogicaUsuario();
-                    case 8 -> bajaFisicaUsuario();
-                    case 9 -> crearUsuarioConCredencialTx();
-                    case 10 -> crearCredencialParaUsuario();
-                    case 11 -> verCredencialPorId();
-                    case 12 -> verCredencialPorUsuarioId();
-                    case 13 -> actualizarPasswordSeguro();
-                    case 14 -> loginUsuario();
-                    case 0 -> System.out.println("👋 Saliendo...");
-                    default -> System.out.println("⚠️ Opción invalida.");
+                    case 1 ->
+                        crearUsuarioSimple();
+                    case 2 ->
+                        listarUsuarios();
+                    case 3 ->
+                        verUsuarioPorId();
+                    case 4 ->
+                        buscarUsuarioPorUsername();
+                    case 5 ->
+                        buscarUsuarioPorEmail();
+                    case 6 ->
+                        actualizarUsuario();
+                    case 7 ->
+                        bajaLogicaUsuario();
+                    case 8 ->
+                        bajaFisicaUsuario();
+                    case 9 ->
+                        crearUsuarioConCredencialTx();
+                    case 10 ->
+                        crearCredencialParaUsuario();
+                    case 11 ->
+                        verCredencialPorUsuarioId();
+                    case 12 ->
+                        verCredencialPorId();
+                    case 13 ->
+                        actualizarPasswordSeguro();
+                    case 14 ->
+                        loginUsuario();
+                    case 0 ->
+                        System.out.println("👋 Saliendo...");
+                    default ->
+                        System.out.println("⚠️ Opción invalida.");
                 }
             } catch (Exception e) {
                 System.out.println("❌ Error: " + e.getMessage());
@@ -56,27 +72,25 @@ public class AppMenu {
     }
 
     private void mostrarMenu() {
-    System.out.println("========= MENÚ TFI (Usuario / Credencial) =========");
-    System.out.println(" 1) Crear Usuario (simple)");
-    System.out.println(" 2) Listar Usuarios");
-    System.out.println(" 3) Ver Usuario por ID");
-    System.out.println(" 4) Buscar Usuario por NOMBRE DE USUARIO");
-    System.out.println(" 5) Buscar Usuario por EMAIL");
-    System.out.println(" 6) Actualizar Usuario");
-    System.out.println(" 7) Eliminar Usuario (baja lógica)");
-    System.out.println(" 8) Eliminar Usuario (baja física)");
-    System.out.println(" 9) Crear Usuario + Credencial (TRANSACCIÓN)");
-    System.out.println("10) Crear Credencial para Usuario existente");
-    System.out.println("11) Ver Credencial por ID");
-    System.out.println("12) Ver Credencial por usuarioId");
-    System.out.println("13) Actualizar contraseña (stored procedure)");
-    System.out.println("14) Login de Usuario (validar contraseña)");
-    System.out.println(" 0) Salir");
-}
-
+        System.out.println("========= MENÚ TFI (Usuario / Credencial) =========");
+        System.out.println(" 1) Crear Usuario (simple)");
+        System.out.println(" 2) Listar Usuarios");
+        System.out.println(" 3) Ver Usuario por ID");
+        System.out.println(" 4) Buscar Usuario por NOMBRE DE USUARIO");
+        System.out.println(" 5) Buscar Usuario por EMAIL");
+        System.out.println(" 6) Actualizar Usuario");
+        System.out.println(" 7) Eliminar Usuario (baja lógica)");
+        System.out.println(" 8) Eliminar Usuario (baja física)");
+        System.out.println(" 9) Crear Usuario + Credencial (TRANSACCIÓN)");
+        System.out.println("10) Crear Credencial para Usuario existente");
+        System.out.println("11) Ver Credencial por usuarioId");
+        System.out.println("12) Ver Datos de Credencial por ID (de la credencial)");
+        System.out.println("13) Actualizar contraseña (stored procedure)");
+        System.out.println("14) Login de Usuario (validar contraseña)");
+        System.out.println(" 0) Salir");
+    }
 
     // ===================== USUARIO =====================
-
     private void crearUsuarioSimple() throws SQLException {
         Usuario u = new Usuario();
         u.setEliminado(false);
@@ -130,22 +144,34 @@ public class AppMenu {
         System.out.println("Editando: " + u);
 
         String username = leerStrOpc("Nuevo username (enter para dejar igual)");
-        if (!username.isBlank()) u.setUsername(username);
+        if (!username.isBlank()) {
+            u.setUsername(username);
+        }
 
         String nombre = leerStrOpc("Nuevo nombre (enter para dejar igual)");
-        if (!nombre.isBlank()) u.setNombre(nombre);
+        if (!nombre.isBlank()) {
+            u.setNombre(nombre);
+        }
 
         String apellido = leerStrOpc("Nuevo apellido (enter para dejar igual)");
-        if (!apellido.isBlank()) u.setApellido(apellido);
+        if (!apellido.isBlank()) {
+            u.setApellido(apellido);
+        }
 
         String email = leerStrOpc("Nuevo email (enter para dejar igual)");
-        if (!email.isBlank()) u.setEmail(email);
+        if (!email.isBlank()) {
+            u.setEmail(email);
+        }
 
         String activoStr = leerStrOpc("Activo? (S/N, enter para dejar igual)");
-        if (!activoStr.isBlank()) u.setActivo(activoStr.equalsIgnoreCase("S"));
+        if (!activoStr.isBlank()) {
+            u.setActivo(activoStr.equalsIgnoreCase("S"));
+        }
 
         String estStr = leerStrOpc("Estado (ACTIVO/INACTIVO, enter para dejar igual)");
-        if (!estStr.isBlank()) u.setEstado(Estado.from(estStr));
+        if (!estStr.isBlank()) {
+            u.setEstado(Estado.from(estStr));
+        }
 
         usuarioService.update(u);
         System.out.println("✅ Usuario actualizado.");
@@ -163,6 +189,18 @@ public class AppMenu {
         System.out.println("🗑️ Usuario eliminado físicamente.");
     }
 
+    /**
+     * Crea un nuevo {@link Usuario} con su {@link CredencialAcceso} en una
+     * transacción.
+     * <p>
+     * El método solicita datos de entrada, inicializa el usuario y su
+     * credencial (incluyendo hash de contraseña y estado), los asocia y delega
+     * la persistencia al {@code usuarioService}. Finalmente imprime el ID
+     * generado.
+     * </p>
+     *
+     * @throws SQLException si ocurre un error al guardar en la base de datos.
+     */
     private void crearUsuarioConCredencialTx() throws SQLException {
         // Usuario
         Usuario u = new Usuario();
@@ -180,12 +218,10 @@ public class AppMenu {
         c.setEliminado(false);
         c.setEstado(Estado.ACTIVO);
         c.setHashPassword(leerStr("Password (se guardara el hash SHA-256)"));
-        c.setSalt("manual"); // si querés, después agregamos generación de salt
+        c.setSalt("manual");
         c.setUltimoCambio(LocalDateTime.now());
         c.setRequiereReset(false);
         // set usuarioId luego de crear usuario -> lo hace el service
-
-        // ligamos la credencial al usuario antes de llamar al service
         u.setCredencial(c);
 
         Long nuevoId = usuarioService.createUsuarioConCredencial(u);
@@ -193,21 +229,28 @@ public class AppMenu {
     }
 
     // ===================== CREDENCIAL =====================
-
     private void crearCredencialParaUsuario() throws SQLException {
         long usuarioId = leerLong("Usuario ID para asociar credencial");
+        String passwordPlano = leerStr("Password (se guardará el hash SHA-256)");
+
+        // Generar salt aleatorio
+        String salt = integradorfinal.programacion2.util.PasswordUtil.generateSalt(16);
+
+        // Calcular hash con SHA-256 + salt
+        String hash = integradorfinal.programacion2.util.PasswordUtil.hashPassword(passwordPlano, salt);
+
         CredencialAcceso c = new CredencialAcceso();
         c.setEliminado(false);
         c.setUsuarioId(usuarioId);
         c.setEstado(Estado.ACTIVO);
         c.setUltimaSesion(null);
-        c.setHashPassword(leerStr("Password (se guardara el hash SHA-256)"));
-        c.setSalt("manual");
+        c.setHashPassword(hash);   // aguarda el hash
+        c.setSalt(salt);           // guarda el salt generado
         c.setUltimoCambio(LocalDateTime.now());
         c.setRequiereReset(false);
 
         Long id = credService.create(c);
-        System.out.println("✅ Credencial creada con id=" + id);
+        System.out.println("Credencial creada con id=" + id);
     }
 
     private void verCredencialPorId() throws SQLException {
@@ -222,15 +265,14 @@ public class AppMenu {
         System.out.println(c.map(Object::toString).orElse("(no encontrada)"));
     }
 
-   private void actualizarPasswordSeguro() throws SQLException {
-    long usuarioId = leerLong("Usuario ID");
-    String nuevoPassword = leerStr("Nuevo password (se guardará hash SHA-256)");
-    credService.updatePasswordSeguro(usuarioId, nuevoPassword, "IGNORAR");
-    System.out.println("🔐 Password actualizada vía stored procedure.");
-}
+    private void actualizarPasswordSeguro() throws SQLException {
+        long usuarioId = leerLong("Usuario ID");
+        String nuevoPassword = leerStr("Nuevo password (se guardará hash SHA-256)");
+        credService.updatePasswordSeguro(usuarioId, nuevoPassword, "IGNORAR");
+        System.out.println("🔐 Password actualizada vía stored procedure.");
+    }
 
     // ===================== Helpers de entrada =====================
-
     private String leerStr(String label) {
         System.out.print(label + ": ");
         String s = sc.nextLine();
@@ -280,44 +322,45 @@ public class AppMenu {
             System.out.println("Valor invalido. Use ACTIVO o INACTIVO.");
         }
     }
+
     private void loginUsuario() throws SQLException {
-    System.out.println("=== LOGIN DE USUARIO ===");
+        System.out.println("=== LOGIN DE USUARIO ===");
 
-    String username = leerStr("Username");
-    String passwordIngresada = leerStr("Password");
+        String username = leerStr("Username");
+        String passwordIngresada = leerStr("Password");
 
-    // 1. Buscar usuario por username
-    Optional<Usuario> optUser = usuarioService.findByUsername(username);
-    if (optUser.isEmpty()) {
-        System.out.println("❌ Usuario no encontrado.");
-        return;
+        // 1. Buscar usuario por username
+        Optional<Usuario> optUser = usuarioService.findByUsername(username);
+        if (optUser.isEmpty()) {
+            System.out.println("❌ Usuario no encontrado.");
+            return;
+        }
+
+        Usuario u = optUser.get();
+
+        // 2. Buscar credencial asociada al usuario
+        Optional<CredencialAcceso> optCred = credService.findByUsuarioId(u.getIdUsuario());
+        if (optCred.isEmpty()) {
+            System.out.println("⚠️ No hay credencial asociada a este usuario.");
+            return;
+        }
+
+        CredencialAcceso cred = optCred.get();
+
+        // 3. Validar password ingresada contra hash y salt
+        boolean ok = integradorfinal.programacion2.util.PasswordUtil.validatePassword(
+                passwordIngresada,
+                cred.getSalt(),
+                cred.getHashPassword()
+        );
+
+        if (ok) {
+            System.out.println("✅ Login exitoso. Bienvenido, " + u.getNombre() + "!");
+            cred.setUltimaSesion(LocalDateTime.now());
+            credService.update(cred); // actualiza la última sesión
+        } else {
+            System.out.println("❌ Contraseña incorrecta.");
+        }
     }
-
-    Usuario u = optUser.get();
-
-    // 2. Buscar credencial asociada al usuario
-    Optional<CredencialAcceso> optCred = credService.findByUsuarioId(u.getIdUsuario());
-    if (optCred.isEmpty()) {
-        System.out.println("⚠️ No hay credencial asociada a este usuario.");
-        return;
-    }
-
-    CredencialAcceso cred = optCred.get();
-
-    // 3. Validar password ingresada contra hash y salt
-    boolean ok = integradorfinal.programacion2.util.PasswordUtil.validatePassword(
-            passwordIngresada,
-            cred.getSalt(),
-            cred.getHashPassword()
-    );
-
-    if (ok) {
-        System.out.println("✅ Login exitoso. Bienvenido, " + u.getNombre() + "!");
-        cred.setUltimaSesion(LocalDateTime.now());
-        credService.update(cred); // actualiza la última sesión
-    } else {
-        System.out.println("❌ Contraseña incorrecta.");
-    }
-}
 
 }

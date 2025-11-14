@@ -161,3 +161,51 @@ VALUES
 (2, 0, 2, 'ACTIVO', NULL, '83de667011fdd37c72b91dfa80754634309ce7590b28e5b8103134bb9d4ce9f2', 'a88c6229e545981effb8516c821f0cc2', '2025-11-14 00:23:59', 0),
 (3, 0, 3, 'ACTIVO', NULL, 'b2b9d791185f19cf6df32ce9b8426583cd124b8272a9064f7c596515aeb34246', 'b2fe845062eae5cbcb78e726e5d66524', '2025-11-14 00:24:46', 0),
 (4, 0, 4, 'ACTIVO', NULL, 'a5fed4461e10a0bd3f283be1658fd1eb7712f15fa2ec792d89c3068345801e84', '125b28f83d02162dbd9fc432a6c69fc0', '2025-11-14 00:25:21', 0);
+}
+
+
+/* ===========================================================
+ * PROCEDURE: sp_actualizar_password_seguro
+ * -----------------------------------------------------------
+ * Actualiza de forma segura la contraseña de un usuario.
+ *
+ * Parámetros:
+ *   - p_usuario_id : ID del usuario al que se le actualiza la credencial
+ *   - p_nuevo_hash : Nuevo hash de la contraseña (ej. SHA-256)
+ *   - p_nuevo_salt : Nuevo valor de salt asociado al hash
+ *
+ * Acciones:
+ *   - Modifica los campos hash_password y salt en la tabla credencial_acceso
+ *   - Actualiza la fecha de último cambio con NOW()
+ *   - Marca requiere_reset = FALSE
+ *
+ * Uso:
+ *   CALL sp_actualizar_password_seguro(123, 'hashGenerado', 'saltGenerado');
+ *
+ * Nota:
+ *   Este procedimiento evita SQL dinámico y protege contra inyección.
+ * =========================================================== */
+
+ DELIMITER //
+ 
+CREATE PROCEDURE sp_actualizar_password_seguro (
+    IN p_usuario_id INT,
+    IN p_nuevo_hash VARCHAR(255),
+    IN p_nuevo_salt VARCHAR(64)
+)
+BEGIN
+    -- Utiliza parámetros de entrada que son tratados como datos.
+    -- La consulta está predefinida y no se construye con concatenación de strings (NO ES SQL DINÁMICO).
+    UPDATE credencial_acceso
+    SET
+        hash_password = p_nuevo_hash,
+        salt = p_nuevo_salt,
+        ultimo_cambio = NOW(),
+        requiere_reset = FALSE
+    WHERE
+        usuario_id = p_usuario_id;
+        
+END //
+ 
+DELIMITER ;
+-- Limpiamos el delimitador
