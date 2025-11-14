@@ -411,6 +411,16 @@ Estado (ACTIVO/INACTIVO): activo
 #### 2. Listar Usuarios
 - Muestra todos los usuarios 
 
+Ejemplo:
+
+```
+Opcion: 2
+✅ Conectado correctamente a la base de datos.
+Usuario{idUsuario=1, username='matias.carro', email='matias.carro@mail.com', activo=true, estado=ACTIVO}
+Usuario{idUsuario=2, username='hugo.catalan', email='hugo.catalan@mail.com', activo=true, estado=ACTIVO}
+Usuario{idUsuario=3, username='ignacio.carne', email='ignacio.carne@mail.com', activo=true, estado=ACTIVO}
+```
+
 ### 3. Ver Usuario por ID
 - Busca un usuario por su ID (se puede ver en listar, la misma es AUTOINCREMENT)
 
@@ -473,11 +483,29 @@ Estado (ACTIVO/INACTIVO, enter para dejar igual):
 
 Se ingresa ID para hacerlo.
 
+Ejemplo:
+
+```
+Opcion: 7
+ID de usuario a dar de baja (logica): 8
+✅ Conectado correctamente a la base de datos.
+🗂️ Usuario marcado como eliminado.
+```
+
 ### 8. Eliminar Usuario (baja física)
 
 - Da de baja fisica al usuario (lo elimina de la base de datos)
 
 Se ingresa ID para hacerlo.
+
+Ejemplo:
+
+```
+Opcion: 8
+ID de usuario a eliminar (fisico): 7
+✅ Conectado correctamente a la base de datos.
+🗑️ Usuario eliminado físicamente.
+```
 
 ### 9. Crear Usuario + Credencial (TRANSACCIÓN)
 
@@ -545,13 +573,6 @@ ID de credencial: 1
 CredencialAcceso{idCredencial=1, usuarioId=1, estado=ACTIVO, requiereReset=false}
 ```
 
-Ejemplo:
- 
-```
-Usuario ID: 1
-✅ Conectado correctamente a la base de datos.
-CredencialAcceso{idCredencial=1, usuarioId=1, estado=ACTIVO, requiereReset=false}
-```
 
 ### 13. Actualizar contraseña (stored procedure)
 

@@ -211,35 +211,36 @@ Especificaciones funcionales completas del sistema CRUD de usuarios y credencial
 
 
 ```
-┌───────────────────────────────────┐
-│             usuario               │
-├───────────────────────────────────┤
-│ id_usuario: BIGINT PK             │
-│ username: VARCHAR(50) NOT NULL    │
-│ nombre: VARCHAR(50) NOT NULL      │
-│ apellido: VARCHAR(50) NOT NULL    │
-│ email: VARCHAR(100) NOT NULL      │
-│ fecha_registro: DATETIME NOT NULL │
-│ activo: BOOLEAN DEFAULT TRUE      │
-│ estado: ENUM('ACTIVO','INACTIVO') │
-│ eliminado: BOOLEAN DEFAULT FALSE  │
-└───────────────┬───────────────────┘
-                │ 1..1 (FK usuario_id)
-                ▼
-┌───────────────────────────────────┐
-│        credencial_acceso          │
-├───────────────────────────────────┤
-│ id_credencial: BIGINT PK          │
-│ usuario_id: BIGINT FK NOT NULL    │
-│ estado: ENUM('ACTIVO','INACTIVO') │
-│ ultima_sesion: DATETIME NULL      │
-│ hash_password: VARCHAR(256)       │
-│ salt: VARCHAR(50)                 │
-│ ultimo_cambio: DATETIME           │
-│ requiere_reset: BOOLEAN           │
-│ eliminado: BOOLEAN DEFAULT FALSE  │
-└───────────────────────────────────┘
-
+┌───────────────────────────────────────────────┐
+│                   usuario                     │
+├───────────────────────────────────────────────┤
+│ id_usuario: INT PK AUTO_INCREMENT             │
+│ eliminado: BOOLEAN NOT NULL DEFAULT FALSE     │
+│ username: VARCHAR(60) NOT NULL UNIQUE         │
+│ nombre: VARCHAR(100) NOT NULL                 │
+│ apellido: VARCHAR(100) NOT NULL               │
+│ email: VARCHAR(120) NOT NULL UNIQUE           │
+│ fecha_registro: DATETIME NOT NULL DEFAULT NOW │
+│ activo: BOOLEAN NOT NULL DEFAULT TRUE         │
+│ estado: VARCHAR(15) NOT NULL DEFAULT 'ACTIVO' │
+│   (CHECK estado IN ('ACTIVO','INACTIVO'))     │
+└───────────────────┬───────────────────────────┘
+                    │ 1..1 (FK usuario_id)
+                    ▼
+┌───────────────────────────────────────────────┐
+│              credencial_acceso                │
+├───────────────────────────────────────────────┤
+│ id_credencial: INT PK AUTO_INCREMENT          │
+│ eliminado: BOOLEAN NOT NULL DEFAULT FALSE     │
+│ usuario_id: INT NOT NULL UNIQUE FK            │
+│ estado: VARCHAR(15) NOT NULL                  │
+│   (CHECK estado IN ('ACTIVO','INACTIVO'))     │
+│ ultima_sesion: TIMESTAMP NULL                 │
+│ hash_password: VARCHAR(255) NOT NULL          │
+│ salt: VARCHAR(64) NULL                        │
+│ ultimo_cambio: DATETIME NULL                  │
+│ requiere_reset: BOOLEAN NOT NULL DEFAULT FALSE│
+└───────────────────────────────────────────────┘
 ```
 
 
