@@ -211,7 +211,35 @@ Especificaciones funcionales completas del sistema CRUD de usuarios y credencial
 
 
 ```
-┌───────────────────────────────────┐ │             usuario               │ ├───────────────────────────────────┤ │ id_usuario: BIGINT PK             │ │ username: VARCHAR(50) NOT NULL    │ │ nombre: VARCHAR(50) NOT NULL      │ │ apellido: VARCHAR(50) NOT NULL    │ │ email: VARCHAR(100) NOT NULL      │ │ fecha_registro: DATETIME NOT NULL │ │ activo: BOOLEAN DEFAULT TRUE      │ │ estado: ENUM('ACTIVO','INACTIVO') │ │ eliminado: BOOLEAN DEFAULT FALSE  │ └───────────────┬───────────────────┘ │ 1..1 │ FK ▼ ┌───────────────────────────────────┐ │        credencial_acceso          │ ├───────────────────────────────────┤ │ id_credencial: BIGINT PK          │ │ usuario_id: BIGINT FK NOT NULL    │ │ estado: ENUM('ACTIVO','INACTIVO') │ │ ultima_sesion: DATETIME NULL      │ │ hash_password: VARCHAR(256)       │ │ salt: VARCHAR(50)                 │ │ ultimo_cambio: DATETIME           │ │ requiere_reset: BOOLEAN           │ │ eliminado: BOOLEAN DEFAULT FALSE  │ └───────────────────────────────────┘
+┌───────────────────────────────────┐
+│             usuario               │
+├───────────────────────────────────┤
+│ id_usuario: BIGINT PK             │
+│ username: VARCHAR(50) NOT NULL    │
+│ nombre: VARCHAR(50) NOT NULL      │
+│ apellido: VARCHAR(50) NOT NULL    │
+│ email: VARCHAR(100) NOT NULL      │
+│ fecha_registro: DATETIME NOT NULL │
+│ activo: BOOLEAN DEFAULT TRUE      │
+│ estado: ENUM('ACTIVO','INACTIVO') │
+│ eliminado: BOOLEAN DEFAULT FALSE  │
+└───────────────┬───────────────────┘
+                │ 1..1 (FK usuario_id)
+                ▼
+┌───────────────────────────────────┐
+│        credencial_acceso          │
+├───────────────────────────────────┤
+│ id_credencial: BIGINT PK          │
+│ usuario_id: BIGINT FK NOT NULL    │
+│ estado: ENUM('ACTIVO','INACTIVO') │
+│ ultima_sesion: DATETIME NULL      │
+│ hash_password: VARCHAR(256)       │
+│ salt: VARCHAR(50)                 │
+│ ultimo_cambio: DATETIME           │
+│ requiere_reset: BOOLEAN           │
+│ eliminado: BOOLEAN DEFAULT FALSE  │
+└───────────────────────────────────┘
+
 ```
 
 
