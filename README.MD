@@ -671,4 +671,7 @@ TPI-Prog2-fusion-final/
 **Java**: 17+
 **MySQL**: 8.x
 **Maven**: 3.9+
+
+<br>
+
 **Proyecto Educativo** - Trabajo Práctico Integrador de Programación 2 - Grupo 18 - Hugo Catalan, Ignacio Carné, Matias Carro, Gabriel Carbajal
