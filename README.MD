@@ -39,24 +39,24 @@ Este archivo permite cambiar la configuracion de la conexion con la base de dato
 Dentro de este estan lo valores por defecto y se puede modificar lo que se requiera luego de los =
 por ejemplo, para cambiar el puerto db.port=####
 
-### ==============================
-### CONFIGURACI\u00d3N BASE DE DATOS
-### ==============================
+> ==============================
+> CONFIGURACI\u00d3N BASE DE DATOS
+> ==============================
 
-### Host del servidor MySQL (ej: 127.0.0.1 o localhost)
-db.host=127.0.0.1
+> Host del servidor MySQL (ej: 127.0.0.1 o localhost)
+> db.host=127.0.0.1
 
-### Puerto del servidor MySQL (por defecto 3306)
-db.port=3306
+> Puerto del servidor MySQL (por defecto 3306)
+> db.port=3306
 
-### Nombre de la conexion / base de datos
-db.name=tpi_prog_2
+> Nombre de la conexion / base de datos
+> db.name=tpi_prog_2
 
-### Usuario y contrase\u00f1a
-jdbc.user=root
-jdbc.pass=1234
+> Usuario y contrase\u00f1a
+> jdbc.user=root
+> jdbc.pass=1234
 
-### Driver JDBC de MySQL
-db.driver=com.mysql.cj.jdbc.Driver
+> Driver JDBC de MySQL
+> db.driver=com.mysql.cj.jdbc.Driver
 
 
