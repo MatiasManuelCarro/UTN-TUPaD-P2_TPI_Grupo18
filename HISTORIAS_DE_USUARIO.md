@@ -353,5 +353,7 @@ CREATE INDEX idx_credencial_estado ON credencial_acceso(estado);
 **Total Historias de Usuario**: 11  
 **Total Reglas de Negocio**: 51  
 **Arquitectura**: 4 capas (Main → Service → DAO → Models)
+**Proyecto Educativo** - Trabajo Práctico Integrador de Programación 2 - Grupo 18 - Hugo Catalan, Ignacio Carné, Matias Carro, Gabriel Carbajal
+
 
 
