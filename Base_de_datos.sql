@@ -115,7 +115,7 @@ CREATE INDEX ix_cred_estado ON credencial_acceso(estado);
 
 
 /* ===========================================================
-2) CREDENCIALES 1:1 (coherentes con usuario.estado)
+ CREDENCIALES 1:1 (coherentes con usuario.estado)
 =========================================================== */
 INSERT INTO credencial_acceso
 (usuario_id, estado, ultima_sesion, eliminado, hash_password, salt,
@@ -140,38 +140,6 @@ DATE_SUB(NOW(), INTERVAL (u.id_usuario % 180) DAY),
 FROM usuario u
 LEFT JOIN credencial_acceso c ON c.usuario_id = u.id_usuario
 WHERE c.usuario_id IS NULL;
-
--- ===========
---  SEGURIDAD 
--- ===========
-
--- ANTI INYECCION SQL
-
---  Procedimiento SQL seguro
-
- DELIMITER //
- 
-CREATE PROCEDURE sp_actualizar_password_seguro (
-	IN p_usuario_id INT,
-	IN p_nuevo_hash VARCHAR(255),
-	IN p_nuevo_salt VARCHAR(64)
-)
-BEGIN
-	-- Utiliza parámetros de entrada que son tratados como datos.
-	-- La consulta está predefinida y no se construye con concatenación de strings (NO ES SQL DINÁMICO).
-	UPDATE credencial_acceso
-	SET
-    	hash_password = p_nuevo_hash,
-    	salt = p_nuevo_salt,
-        ultimo_cambio = NOW(),
-    	requiere_reset = FALSE
-	WHERE
-    	usuario_id = p_usuario_id;
-    	
-END //
- 
-DELIMITER ;
--- Limpiamos el delimitador
 
 
 /* ===========================================================

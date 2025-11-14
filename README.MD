@@ -52,9 +52,8 @@ nota: Los usuarios por defecto tienen la clave "12345" para realizar pruebas
 
 - Este archivo permite cambiar la configuracion de la conexion con la base de datos, sin modificar codigo.
 
-- Dentro de este estan lo valores por defecto y se puede modificar lo que se requiera luego de los =
+- “Definir variables de entorno DB_USER y DB_PASS antes de ejecutar”.
 
-- Por ejemplo, para cambiar el puerto db.port=####
 <br>
 
 > *****************************
@@ -71,8 +70,9 @@ nota: Los usuarios por defecto tienen la clave "12345" para realizar pruebas
 > db.name=tpi_prog_2
 
 > Usuario y contrase\u00f1a
-> jdbc.user=root
-> jdbc.pass=1234
+> jdbc.user={DB_USER}
+> jdbc.pass={DB_PASS}
+
 
 > Driver JDBC de MySQL
 > db.driver=com.mysql.cj.jdbc.Driver
