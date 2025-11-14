@@ -370,12 +370,12 @@ Estado (ACTIVO/INACTIVO): activo
 
 - Ejemplo:
 
-'''
+```
 Opcion: 3
 
 Conectado correctamente a la base de datos.
 Usuario{idUsuario=1, username='matias.carro', email='matias.carro@mail.com', activo=true, estado=ACTIVO}
-'''
+```
 
 ### 4. Buscar Usuario por NOMBRE DE USUARIO
 
@@ -383,10 +383,203 @@ Usuario{idUsuario=1, username='matias.carro', email='matias.carro@mail.com', act
 
 Ejemplo:
 
-'''
+```
 Opcion: 4
 Username: matias.carro
 ✅ Conectado correctamente a la base de datos.
 Usuario{idUsuario=1, username='matias.carro', email='matias.carro@mail.com', activo=true, estado=ACTIVO}
-'''
+```
 
+### 5. Buscar Usuario por EMAIL
+
+Busca por mail (incluyendo el @...com)
+
+Ejemplo:
+
+```
+Opcion: 5
+Email: ignacio.carne@mail.com
+✅ Conectado correctamente a la base de datos.
+Usuario{idUsuario=3, username='ignacio.carne', email='ignacio.carne@mail.com', activo=true, estado=ACTIVO}
+```
+
+### 6. Actualizar Usuario
+
+- Actualiza los datos del usuario (Ingresar Enter lo deja igual a como estaba)
+
+Ejemplo:
+
+```
+Opcion: 6
+ID de usuario: 2
+✅ Conectado correctamente a la base de datos.
+Editando: Usuario{idUsuario=2, username='hugo.catalan', email='hugo.catalan@mail.com', activo=true, estado=ACTIVO}
+Nuevo username (enter para dejar igual):
+Nuevo nombre (enter para dejar igual):
+Nuevo apellido (enter para dejar igual):
+Nuevo email (enter para dejar igual):
+Estado (ACTIVO/INACTIVO, enter para dejar igual):
+```
+
+### 7. Eliminar Usuario (baja lógica)
+
+- Da de baja logica al usuario (lo esconde de la busqueda pero no lo borra de la base de datos)
+
+Se ingresa ID para hacerlo.
+
+### 8. Eliminar Usuario (baja física)
+
+- Da de baja fisica al usuario (lo elimina de la base de datos)
+
+Se ingresa ID para hacerlo.
+
+### 9. Crear Usuario + Credencial (TRANSACCIÓN)
+
+- Realiza una transaccion en SQL, crea un usuario y le asigna su credencial (Encriptada con SHA-256 + salt)
+
+Solicita: Username, Nombre, Apellido, Email, Estado (ACTIVO/INACTIVO), Password
+
+Ejemplo:
+
+```
+Opcion: 9
+Username: Juan.perez
+Nombre: Juan
+Apellido: Perez
+Email: juan.perez@mail.com
+Estado (ACTIVO/INACTIVO): activo
+Password (se guardara el hash SHA-256): 12345
+✅ Conectado correctamente a la base de datos.
+🔒 Conexión cerrada correctamente.
+✅ Transaccion OK. Usuario id=7 + credencial creada.
+```
+
+### 10. Crear Credencial para Usuario existente
+
+- Crea una contraseña para un usuario nuevo, que se haya creado sin contraseña (para darle el alta a la cuenta)
+
+### 11. Ver Credencial por ID
+
+### 12. Ver Credencial por usuarioId
+
+- Muestra el estado de la credencial (no muestra datos importantes por seguridad)
+
+Ejemplo:
+ 
+```
+Usuario ID: 1
+✅ Conectado correctamente a la base de datos.
+CredencialAcceso{idCredencial=1, usuarioId=1, estado=ACTIVO, requiereReset=false}
+```
+
+### 13. Actualizar contraseña (stored procedure)
+
+- Es un Stores procedure que actualiza una credencial de un usuario 
+
+Ejemplo:
+
+```
+Opcion: 13
+Usuario ID: 4
+Nuevo password (se guardará hash SHA-256): 12345
+✅ Conectado correctamente a la base de datos.
+🔐 Password actualizada vía stored procedure.
+```
+
+### 14. Login de Usuario (validar contraseña)
+
+- Permite logear los usuarios con la clave creada (para las pruebas los usuarios vienen con la clave 12345)
+
+Ejemplo:
+
+```
+Opcion: 14
+=== LOGIN DE USUARIO ===
+Username: gabriel.carbajal
+Password: 12345
+✅ Conectado correctamente a la base de datos.
+✅ Conectado correctamente a la base de datos.
+✅ Login exitoso. Bienvenido, Gabriel!
+✅ Conectado correctamente a la base de datos.
+```
+
+
+### Estructura en Capas
+
+```
+┌─────────────────────────────────────┐
+│     Main / UI Layer                 │
+│  (Interacción con usuario)          │
+│       Main, AppMenu                 │
+└───────────┬─────────────────────────┘
+            │
+┌───────────▼─────────────────────────┐
+│     Service Layer                   │
+│  (Lógica de negocio y validación)   │
+│  CredencialAccesoServiceImpl        │
+│  UsuarioServiceImpl                 │
+└───────────┬─────────────────────────┘
+            │
+┌───────────▼─────────────────────────┐
+│     DAO Layer                       │
+│  (Acceso a datos)                   │
+│  CredencialAccesoDaoImpl,           │
+│  UsuarioDaoImpl                     │
+└───────────┬─────────────────────────┘
+            │
+┌───────────▼─────────────────────────┐
+│     Models Layer                    │
+│  (Entidades de dominio)             │
+│  CredencialAcceso, Usuario,         │
+│   Estado (Enum)                     │
+└─────────────────────────────────────┘
+```
+
+# Componentes Principales
+
+## Config/
+- **Config.java**: Clase de configuración general de la aplicación.
+- **DatabaseConnection.java**: Gestión de conexiones JDBC con inicialización validada y manejo seguro de recursos.
+
+## Dao/
+- **GenericDao<T>**: Interface genérica con operaciones CRUD básicas.
+- **UsuarioDao.java**: DAO para la entidad Usuario, con queries específicas.
+- **CredencialAccesoDao.java**: DAO para credenciales de acceso, con lógica de búsqueda por usuario.
+
+## Dao/Impl/
+- **UsuarioDaoImpl.java**: Implementación concreta de `UsuarioDao`, con consultas SQL y mapeo de resultados.
+- **CredencialAccesoDaoImpl.java**: Implementación de `CredencialAccesoDao`, con validación de credenciales y manejo de excepciones.
+
+## Entities/
+- **Usuario.java**: Entidad Usuario (id, nombre, apellido, estado, credenciales).
+- **CredencialAcceso.java**: Entidad para credenciales (usuario, hash de contraseña, roles).
+- **Estado.java**: Enumeración o clase para representar estados de usuario (activo, inactivo, bloqueado).
+
+## Exceptions/
+- **DataAccessException.java**: Excepción personalizada para errores en acceso a datos (SQL, conexión, etc.).
+
+## Service/
+- **GenericService<T>**: Interface genérica para servicios de negocio.
+- **UsuarioService.java**: Servicio para validaciones y operaciones de usuarios.
+- **CredencialAccesoService.java**: Servicio para validaciones de credenciales y coordinación con utilidades de seguridad.
+
+## Service/Impl/
+- **UsuarioServiceImpl.java**: Implementación de `UsuarioService`, con lógica de negocio y coordinación con DAO.
+- **CredencialAccesoServiceImpl.java**: Implementación de `CredencialAccesoService`, con validación de contraseñas y roles.
+
+## Util/
+- **PasswordUtil.java**: Utilidad para manejo seguro de contraseñas (hash + salt, verificación).
+
+## App/
+- **AppMenu.java**: Orquestador del ciclo de menú principal.
+- **Main.java**: Punto de entrada de la aplicación, inicializa configuración y menú.
+
+
+
+
+---
+**Versión**: 1.0
+**Java**: 17+
+**MySQL**: 8.x
+**Maven**: 3.9+
+**Proyecto Educativo** - Trabajo Práctico Integrador de Programación 2 - Grupo 18 - Hugo Catalan, Ignacio Carné, Matias Carro, Gabriel Carbajal
