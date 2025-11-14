@@ -577,6 +577,8 @@ Password: 12345
 
 ## Estructura de Directorios
 
+
+```
 TPI-Prog2-fusion-final/
 ├── src/main/java/
 │   ├── integradorfinal/programacion2/config/        # Configuración de BD
@@ -615,7 +617,7 @@ TPI-Prog2-fusion-final/
 │   ├── integradorfinal/programacion2app/            # Punto de entrada y menú
 │   │   ├── Main.java
 │   │   └── AppMenu.java
-
+```
 
 
 ---
