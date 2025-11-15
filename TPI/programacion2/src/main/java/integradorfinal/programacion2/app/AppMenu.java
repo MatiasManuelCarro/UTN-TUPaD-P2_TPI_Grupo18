@@ -112,7 +112,7 @@ public class AppMenu {
         System.out.println("12) Ver Datos de Credencial por ID (de la credencial)");
         System.out.println("13) Actualizar contraseña (stored procedure)");
         System.out.println("14) Login de Usuario (validar contraseña)");
-        System.out.println("15) PRUEBA DE ROLLBACK (Solo para desmotracion)");
+        System.out.println("15) PRUEBA DE ROLLBACK (Solo para demostracion)");
         System.out.println(" 0) Salir");
     }
 
@@ -134,7 +134,7 @@ public class AppMenu {
         u.setEstado(leerEstado()); // pido ACTIVO/INACTIVO y lo convierto al enum
 
         Long id = usuarioService.create(u);
-        System.out.println("✅ Usuario creado con id=" + id);
+        System.out.println("Usuario creado con id=" + id);
     }
 
     /**
