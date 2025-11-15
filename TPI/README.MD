@@ -416,7 +416,7 @@ Ejemplo:
 
 ```
 Opcion: 2
-✅ Conectado correctamente a la base de datos.
+Conectado correctamente a la base de datos.
 Usuario{idUsuario=1, username='matias.carro', email='matias.carro@mail.com', activo=true, estado=ACTIVO}
 Usuario{idUsuario=2, username='hugo.catalan', email='hugo.catalan@mail.com', activo=true, estado=ACTIVO}
 Usuario{idUsuario=3, username='ignacio.carne', email='ignacio.carne@mail.com', activo=true, estado=ACTIVO}
@@ -443,7 +443,7 @@ Ejemplo:
 ```
 Opcion: 4
 Username: matias.carro
-✅ Conectado correctamente a la base de datos.
+Conectado correctamente a la base de datos.
 Usuario{idUsuario=1, username='matias.carro', email='matias.carro@mail.com', activo=true, estado=ACTIVO}
 ```
 
@@ -456,7 +456,7 @@ Ejemplo:
 ```
 Opcion: 5
 Email: ignacio.carne@mail.com
-✅ Conectado correctamente a la base de datos.
+Conectado correctamente a la base de datos.
 Usuario{idUsuario=3, username='ignacio.carne', email='ignacio.carne@mail.com', activo=true, estado=ACTIVO}
 ```
 
@@ -469,7 +469,7 @@ Ejemplo:
 ```
 Opcion: 6
 ID de usuario: 2
-✅ Conectado correctamente a la base de datos.
+Conectado correctamente a la base de datos.
 Editando: Usuario{idUsuario=2, username='hugo.catalan', email='hugo.catalan@mail.com', activo=true, estado=ACTIVO}
 Nuevo username (enter para dejar igual):
 Nuevo nombre (enter para dejar igual):
@@ -489,8 +489,8 @@ Ejemplo:
 ```
 Opcion: 7
 ID de usuario a dar de baja (logica): 8
-✅ Conectado correctamente a la base de datos.
-🗂️ Usuario marcado como eliminado.
+Conectado correctamente a la base de datos.
+Usuario marcado como eliminado.
 ```
 
 ### 8. Eliminar Usuario (baja física)
@@ -504,8 +504,8 @@ Ejemplo:
 ```
 Opcion: 8
 ID de usuario a eliminar (fisico): 7
-✅ Conectado correctamente a la base de datos.
-🗑️ Usuario eliminado físicamente.
+Conectado correctamente a la base de datos.
+Usuario eliminado físicamente.
 ```
 
 ### 9. Crear Usuario + Credencial (TRANSACCIÓN)
@@ -524,9 +524,9 @@ Apellido: Perez
 Email: juan.perez@mail.com
 Estado (ACTIVO/INACTIVO): activo
 Password (se guardara el hash SHA-256): 12345
-✅ Conectado correctamente a la base de datos.
-🔒 Conexión cerrada correctamente.
-✅ Transaccion OK. Usuario id=7 + credencial creada.
+Conectado correctamente a la base de datos.
+Conexión cerrada correctamente.
+Transaccion OK. Usuario id=7 + credencial creada.
 ```
 
 ### 10. Crear Credencial para Usuario existente
@@ -541,7 +541,7 @@ Ejemplo:
 Opcion: 10
 Usuario ID para asociar credencial: 7
 Password (se guardará el hash SHA-256): 12345
-✅ Conectado correctamente a la base de datos.
+Conectado correctamente a la base de datos.
 Credencial creada con id=7
 ```
 
@@ -556,7 +556,7 @@ Ejemplo:
 ```
 Opcion: 11
 Usuario ID: 1
-✅ Conectado correctamente a la base de datos.
+Conectado correctamente a la base de datos.
 CredencialAcceso{idCredencial=1, usuarioId=1, estado=ACTIVO, requiereReset=false}
 ```
 
@@ -570,7 +570,7 @@ Ejemplo:
 ```
 Opcion: 12
 ID de credencial: 1
-✅ Conectado correctamente a la base de datos.
+Conectado correctamente a la base de datos.
 CredencialAcceso{idCredencial=1, usuarioId=1, estado=ACTIVO, requiereReset=false}
 ```
 
@@ -585,8 +585,8 @@ Ejemplo:
 Opcion: 13
 Usuario ID: 4
 Nuevo password (se guardará hash SHA-256): 12345
-✅ Conectado correctamente a la base de datos.
-🔐 Password actualizada vía stored procedure.
+Conectado correctamente a la base de datos.
+Password actualizada vía stored procedure.
 ```
 
 ### 14. Login de Usuario (validar contraseña)
@@ -600,20 +600,18 @@ Opcion: 14
 === LOGIN DE USUARIO ===
 Username: gabriel.carbajal
 Password: 12345
-✅ Conectado correctamente a la base de datos.
-✅ Conectado correctamente a la base de datos.
-✅ Login exitoso. Bienvenido, Gabriel!
-✅ Conectado correctamente a la base de datos.
+Login exitoso. Bienvenido, Gabriel!
+Conectado correctamente a la base de datos.
 ```
 
 ### Opcion: 15
 === DEMO ROLLBACK (error simulado) ===
 Antes de la demo, verificá en MySQL cuántos usuarios tenés.
 >>> Iniciando demo de rollback con error simulado...
-✅ Conexión establecida correctamente con la base de datos.
+Conexión establecida correctamente con la base de datos.
 Usuario demo creado con ID (sin commit): 62
 >>> Se ejecutó ROLLBACK correctamente.
-🔒 Conexión cerrada correctamente.
+Conexión cerrada correctamente.
 La operación falló y se revirtió completamente.
 
 
