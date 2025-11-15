@@ -290,17 +290,17 @@ Las credenciales: 12345
 > M2_HOME
 > MAVEN_HOME
 
-Ambas deben tener la ubicacion de la carpeta descomprimida de Maven (Por ejemplo: C\:apache-maven-3.9.11)
+Ambas deben tener la ubicacion de la carpeta descomprimida de Maven (Por ejemplo: C\\:apache-maven-3.9.11)
 
 3. En varaibles del sistema crear la variable:
 
 > MAVEN_HOME
 
-En esta debe estar la ubicacion de la carpeta .bin dentro de maven (Por ejemplo: C\:apache-maven-3.9.11.bin)
+En esta debe estar la ubicacion de la carpeta .bin dentro de maven (Por ejemplo: C\\:apache-maven-3.9.11.bin)
 
 4. ir a Path dentro de variables del sistema y crear uno nuevo. 
 
-Con la ubicacion de la carpeta Maven (Por ejemplo: C\:apache-maven-3.9.11 )
+Con la ubicacion de la carpeta Maven (Por ejemplo: C\\:apache-maven-3.9.11 )
 
 ---
 
