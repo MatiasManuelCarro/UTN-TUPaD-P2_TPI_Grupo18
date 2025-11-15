@@ -233,7 +233,7 @@ nota: Los usuarios por defecto tienen la clave "12345" para realizar pruebas
 
 <br>
 
-
+```
 > ****************************
 > CONFIGURACION BASE DE DATOS
 > ****************************
@@ -254,6 +254,7 @@ nota: Los usuarios por defecto tienen la clave "12345" para realizar pruebas
 
 > Driver JDBC de MySQL
 > db.driver=com.mysql.cj.jdbc.Driver
+```
 
 ## 🔨 Cómo Ejecutar
 
@@ -322,8 +323,10 @@ Con la ubicacion de la carpeta Maven (Por ejemplo: C\\:apache-maven-3.9.11 )
 ## Compilar el Proyecto
 
 ### Windows
+```
 mvn clean compile
 mvn clean package
+```
 
 
 3. Configurar Conexión (Opcional)
@@ -663,6 +666,7 @@ La operación falló y se revirtió completamente.
 
 Al final, podes verificar que la transaccion falló y ningun usuario se creo. 
 
+---
 
 ### Estructura en Capas
 
@@ -734,6 +738,7 @@ Al final, podes verificar que la transaccion falló y ningun usuario se creo.
 - **AppMenu.java**: Orquestador del ciclo de menú principal.
 - **Main.java**: Punto de entrada de la aplicación, inicializa configuración y menú.
 
+---
 
 ## Estructura de Directorios
 
