@@ -260,7 +260,7 @@ nota: Los usuarios por defecto tienen la clave "12345" para realizar pruebas
 
 Luego de crear la base de datos y configurar la conexion:
 
-1. Ejecutar el MAIN
+1. Ejecutar el MAIN (O compilar)
 
 2. Ya podes navegar el Menu. Los usuarios disponibles son:
 
@@ -273,6 +273,15 @@ Luego de crear la base de datos y configurar la conexion:
 > gabriel.carbajal
 
 Las credenciales: 12345
+
+### Los datos de los usuarios para probar son:
+
+| id_usuario | id_credencial | usuario          | mail                       |
+|------------|---------------|------------------|----------------------------|
+| 1          | 1             | matias.carro     | matias.carro@mail.com      |
+| 2          | 2             | hugo.catalan     | hugo.catalan@mail.com      |
+| 3          | 3             | ignacio.carne    | ignacio.carne@mail.com     |
+| 4          | 4             | gabriel.carbajal | gabriel.carbajal@mail.com  |
 
 ---
 
@@ -329,7 +338,7 @@ mvn clean package
 ```
 
 
-3. Configurar Conexión (Opcional)
+3. Configurar Conexión 
 
 Por defecto conecta a:
 
@@ -359,7 +368,7 @@ src/main/resources y modificar el archivo "db.properties"
     
     Usuario y contrase\u00f1a
     jdbc.user=root
-    jdbc.pass=####
+    jdbc.pass=****
     
     Driver JDBC de MySQL
     db.driver=com.mysql.cj.jdbc.Driver
