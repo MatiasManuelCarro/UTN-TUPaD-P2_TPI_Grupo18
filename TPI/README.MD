@@ -293,7 +293,7 @@ Las credenciales: 12345
 
 Ambas deben tener la ubicacion de la carpeta descomprimida de Maven (Por ejemplo: C\\:apache-maven-3.9.11)
 
-3. En varaibles del sistema crear la variable:
+3. En variables del sistema crear la variable:
 
 > MAVEN_HOME
 
@@ -770,9 +770,25 @@ TPI-Prog2-fusion-final/
 │   ├── integradorfinal/programacion2/util/          # Utilidades
 │   │   └── PasswordUtil.java
 │   │
-│   ├── integradorfinal/programacion2app/            # Punto de entrada y menú
-│   │   ├── Main.java
-│   │   └── AppMenu.java
+│   └── integradorfinal/programacion2app/            # Punto de entrada y menú
+│       ├── Main.java
+│       └── AppMenu.java
+│
+├── src/test/java/                                   # Test Packages
+│   └── (default package)                            # Clases de prueba
+│
+├── src/main/resources/                              # Recursos adicionales
+│   └── db.properties                                # Configuración de BD
+│
+├── pom.xml                                          # Configuración Maven
+├── nbactions.xml                                    # Configuración NetBeans
+│
+├── Dependencies/                                    # Librerías externas
+│   ├── mysql-connector-j-8.0.33.jar
+│   └── protobuf-java-3.21.9.jar
+│
+└── Java Dependencies/                               # Dependencias del JDK
+    └── JDK 24 (Default)                             # Con compatibilidad a partir de 17
 ```
 
 
