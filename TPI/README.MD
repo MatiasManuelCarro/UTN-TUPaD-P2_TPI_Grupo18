@@ -273,6 +273,7 @@ Luego de crear la base de datos y configurar la conexion:
 
 Las credenciales: 12345
 
+---
 
 ## Antes de ejecutar:
 
@@ -301,6 +302,7 @@ En esta debe estar la ubicacion de la carpeta .bin dentro de maven (Por ejemplo:
 
 Con la ubicacion de la carpeta Maven (Por ejemplo: C\:apache-maven-3.9.11 )
 
+---
 
 ### Como configurar UTF-8 en java (Se encuentra una guia con imagenes en la carpeta Extras del repo)
 
@@ -313,6 +315,8 @@ Con la ubicacion de la carpeta Maven (Por ejemplo: C\:apache-maven-3.9.11 )
 
 -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -Dconsole.encoding=UTF-8
 ```
+
+--- 
 
 ## Compilar el Proyecto
 
