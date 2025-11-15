@@ -652,12 +652,16 @@ Conectado correctamente a la base de datos.
 ### Opcion: 15
 === DEMO ROLLBACK (error simulado) ===
 Antes de la demo, verificá en MySQL cuántos usuarios tenés.
->>> Iniciando demo de rollback con error simulado...
+```
+> Iniciando demo de rollback con error simulado...
 Conexión establecida correctamente con la base de datos.
 Usuario demo creado con ID (sin commit): 62
->>> Se ejecutó ROLLBACK correctamente.
+> Se ejecutó ROLLBACK correctamente.
 Conexión cerrada correctamente.
 La operación falló y se revirtió completamente.
+```
+
+Al final, podes verificar que la transaccion falló y ningun usuario se creo. 
 
 
 ### Estructura en Capas
