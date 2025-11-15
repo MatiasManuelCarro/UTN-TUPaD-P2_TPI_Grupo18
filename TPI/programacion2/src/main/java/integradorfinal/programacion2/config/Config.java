@@ -45,8 +45,8 @@ public final class Config {
     // -------------------- VALORES CONFIGURADOS --------------------
     /**
      * Estos campos se llenan usando las propiedades del archivo.
-     * Si alguna propiedad no está en db.properties, uso el valor por defecto
-     * que le pasé como segundo parámetro.
+     * Si alguna propiedad no está en db.properties, se utiliza el valor por defecto
+     * como segundo parámetro.
      */
     public static final String DB_HOST   = props.getProperty("db.host", "127.0.0.1");
     public static final String DB_PORT   = props.getProperty("db.port", "3306");
@@ -56,7 +56,7 @@ public final class Config {
     public static final String DB_DRIVER = props.getProperty("db.driver", "com.mysql.cj.jdbc.Driver");
 
     /**
-     * Acá armo la URL completa de conexión usando los valores configurados.
+     * Acá se arma  la URL completa de conexión usando los valores configurados.
      * También agrego los parámetros que necesito para UTF-8 y compatibilidad
      * con MySQL moderno (SSL, timezone, PK retrieval, etc.).
      */
