@@ -29,7 +29,7 @@ public final class Config {
 
             // Si el archivo no aparece, fuerzo un error claro.
             if (input == null) {
-                throw new RuntimeException("❌ No se encontró db.properties en resources");
+                throw new RuntimeException("No se encontró db.properties en resources");
             }
 
             // Si el archivo existe, cargo todas sus propiedades.
@@ -38,7 +38,7 @@ public final class Config {
         } catch (IOException e) {
             // Si falla la carga por cualquier motivo, quiero que explote acá
             // y no durante la conexión a la base.
-            throw new RuntimeException("❌ Error cargando configuración", e);
+            throw new RuntimeException("Error cargando configuración", e);
         }
     }
 

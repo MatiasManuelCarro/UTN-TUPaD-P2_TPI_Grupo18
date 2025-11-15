@@ -80,13 +80,13 @@ public class AppMenu {
                     case 15 ->
                         demoRollbackMenu();
                     case 0 ->
-                        System.out.println("👋 Saliendo...");
+                        System.out.println("Saliendo...");
                     default ->
-                        System.out.println("⚠️ Opción invalida.");
+                        System.out.println("Opción invalida.");
                 }
             } catch (Exception e) {
                 // Centralizo acá el manejo de cualquier excepción que se dispare en las operaciones.
-                System.out.println("❌ Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage());
             }
             System.out.println();
         } while (op != 0);
@@ -236,7 +236,7 @@ public class AppMenu {
     private void bajaLogicaUsuario() throws SQLException {
         long id = leerLong("ID de usuario a dar de baja (logica)");
         usuarioService.softDeleteById(id);
-        System.out.println("🗂️ Usuario marcado como eliminado.");
+        System.out.println("Usuario marcado como eliminado.");
     }
 
     /**
@@ -246,7 +246,7 @@ public class AppMenu {
     private void bajaFisicaUsuario() throws SQLException {
         long id = leerLong("ID de usuario a eliminar (fisico)");
         usuarioService.deleteById(id);
-        System.out.println("🗑️ Usuario eliminado físicamente.");
+        System.out.println(" Usuario eliminado físicamente.");
     }
 
     /**
@@ -288,7 +288,7 @@ public class AppMenu {
         u.setCredencial(c);
 
         Long nuevoId = usuarioService.createUsuarioConCredencial(u);
-        System.out.println("✅ Transaccion OK. Usuario id=" + nuevoId + " + credencial creada.");
+        System.out.println("Transaccion OK. Usuario id=" + nuevoId + " + credencial creada.");
     }
 
     // ===================== CREDENCIAL =====================
@@ -350,7 +350,7 @@ public class AppMenu {
         String nuevoPassword = leerStr("Nuevo password (se guardará hash SHA-256)");
         // El tercer parámetro "IGNORAR" es un placeholder según la firma del SP.
         credService.updatePasswordSeguro(usuarioId, nuevoPassword, "IGNORAR");
-        System.out.println("🔐 Password actualizada vía stored procedure.");
+        System.out.println("Password actualizada vía stored procedure.");
     }
 
     // ===================== Helpers de entrada =====================
@@ -440,7 +440,7 @@ public class AppMenu {
         // 1. Buscar usuario por username
         Optional<Usuario> optUser = usuarioService.findByUsername(username);
         if (optUser.isEmpty()) {
-            System.out.println("❌ Usuario no encontrado.");
+            System.out.println("Usuario no encontrado.");
             return;
         }
 
@@ -449,7 +449,7 @@ public class AppMenu {
         // 2. Buscar credencial asociada al usuario
         Optional<CredencialAcceso> optCred = credService.findByUsuarioId(u.getIdUsuario());
         if (optCred.isEmpty()) {
-            System.out.println("⚠️ No hay credencial asociada a este usuario.");
+            System.out.println("No hay credencial asociada a este usuario.");
             return;
         }
 
@@ -463,12 +463,12 @@ public class AppMenu {
         );
 
         if (ok) {
-            System.out.println("✅ Login exitoso. Bienvenido, " + u.getNombre() + "!");
+            System.out.println("Login exitoso. Bienvenido, " + u.getNombre() + "!");
             // Actualizo la última sesión del usuario.
             cred.setUltimaSesion(LocalDateTime.now());
             credService.update(cred); // persisto el cambio
         } else {
-            System.out.println("❌ Contraseña incorrecta.");
+            System.out.println("Contraseña incorrecta.");
         }
     }
 

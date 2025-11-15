@@ -40,11 +40,11 @@ public class DatabaseConnection {
                     Config.DB_PASS
                 );
 
-                System.out.println("✅ Conexión establecida correctamente con la base de datos.");
+                System.out.println("Conexión establecida correctamente con la base de datos.");
 
             } catch (ClassNotFoundException e) {
                 // Error claro si el driver no está en el classpath.
-                System.err.println("❌ No se encontró el driver JDBC. Verifique la configuración.");
+                System.err.println("No se encontró el driver JDBC. Verifique la configuración.");
                 System.err.println("Detalles técnicos: " + e.getMessage());
             }
         }
@@ -63,11 +63,11 @@ public class DatabaseConnection {
             // Solo cierro si existe y realmente está abierta.
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                System.out.println("🔒 Conexión cerrada correctamente.");
+                System.out.println("Conexión cerrada correctamente.");
             }
         } catch (SQLException e) {
             // Mensaje amable para el usuario.
-            System.err.println("⚠️ Hubo un problema al cerrar la conexión, pero no afecta sus datos.");
+            System.err.println(" Hubo un problema al cerrar la conexión, pero no afecta sus datos.");
 
             // Detalle técnico para debugging.
             System.err.println("Detalles técnicos: " + e.getMessage());
