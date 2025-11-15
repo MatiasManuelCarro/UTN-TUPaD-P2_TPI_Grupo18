@@ -288,6 +288,7 @@ Las credenciales: 12345
 2. Crear en variables del usuario:
 
 > M2_HOME
+
 > MAVEN_HOME
 
 Ambas deben tener la ubicacion de la carpeta descomprimida de Maven (Por ejemplo: C\\:apache-maven-3.9.11)
