@@ -1,0 +1,7 @@
+1. Ir a variables del entorno.
+
+2. Agregar una nueva llamada JAVA_TOOL_OPTIONS
+
+3. Ingresar el siguiente valor:
+
+-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -Dconsole.encoding=UTF-8

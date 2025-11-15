@@ -274,6 +274,46 @@ Luego de crear la base de datos y configurar la conexion:
 Las credenciales: 12345
 
 
+## Antes de ejecutar:
+
+- Verificar tener las configuracion correctas:
+- Maven funcionando
+- UTF 8 configurado 
+
+### Como configurar Maven
+
+1. Ir a variables del entorno.
+
+2. Crear en variables del usuario:
+
+> M2_HOME
+> MAVEN_HOME
+
+Ambas deben tener la ubicacion de la carpeta descomprimida de Maven (Por ejemplo: C\:apache-maven-3.9.11)
+
+3. En varaibles del sistema crear la variable:
+
+> MAVEN_HOME
+
+En esta debe estar la ubicacion de la carpeta .bin dentro de maven (Por ejemplo: C\:apache-maven-3.9.11.bin)
+
+4. ir a Path dentro de variables del sistema y crear uno nuevo. 
+
+Con la ubicacion de la carpeta Maven (Por ejemplo: C\:apache-maven-3.9.11 )
+
+
+### Como configurar UTF-8 en java (Se encuentra una guia con imagenes en la carpeta Extras del repo)
+
+```
+1. Ir a variables del entorno.
+
+2. Agregar una nueva llamada JAVA_TOOL_OPTIONS
+
+3. Ingresar el siguiente valor:
+
+-Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -Dconsole.encoding=UTF-8
+```
+
 ## Compilar el Proyecto
 
 ### Windows
