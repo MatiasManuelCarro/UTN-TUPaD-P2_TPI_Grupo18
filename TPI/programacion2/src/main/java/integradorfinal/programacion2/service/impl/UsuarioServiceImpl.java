@@ -94,9 +94,43 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     /**
-     * Crea un Usuario y su Credencial en una sola transacción. Orden correcto
-     * para FK en credencial: primero USUARIO -> luego CREDENCIAL (con
-     * usuario_id).
+     * Crea un nuevo {@link Usuario} junto con su {@link CredencialAcceso} en
+     * una única transacción.
+     *
+     * <p>
+     * Este método aplica validaciones de negocio mínimas (username, email y
+     * credencial obligatorios), inicializa valores por defecto (fecha de
+     * registro, estado, último cambio) y asegura la seguridad de la contraseña
+     * generando un {@code salt} aleatorio y calculando el hash con SHA-256
+     * antes de persistir los datos.</p>
+     *
+     * <p>
+     * La operación se ejecuta de forma transaccional:
+     * <ul>
+     * <li>Se desactiva el autocommit de la conexión.</li>
+     * <li>Se inserta primero el usuario en la tabla {@code usuario},
+     * recuperando su ID generado.</li>
+     * <li>Se inserta la credencial asociada en la tabla
+     * {@code credencial_acceso}, usando el ID del usuario como FK.</li>
+     * <li>Si ambas operaciones son exitosas, se confirma la transacción con
+     * {@code commit()}.</li>
+     * <li>Si ocurre cualquier error, se ejecuta {@code rollback()} para
+     * revertir los cambios y evitar inconsistencias.</li>
+     * </ul>
+     * Al finalizar, se restaura el estado original de autocommit y se cierra la
+     * conexión.</p>
+     *
+     * @param usuario objeto {@link Usuario} a persistir, con datos básicos y
+     * credencial asociada
+     * @return el identificador generado para el nuevo usuario
+     * @throws IllegalArgumentException si el usuario o su credencial no cumplen
+     * las validaciones mínimas
+     * @throws SQLException si ocurre un error en la inserción de usuario o
+     * credencial, o en las operaciones de commit/rollback
+     *
+     * @see java.sql.Connection#setAutoCommit(boolean)
+     * @see java.sql.Connection#commit()
+     * @see java.sql.Connection#rollback()
      */
     @Override
     public Long createUsuarioConCredencial(Usuario usuario) throws SQLException {
@@ -140,36 +174,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         cred.setSalt(salt);
         cred.setHashPassword(hash);
 
-        /**
-         * Crea un nuevo {@link Usuario} junto con su {@link CredencialAcceso}
-         * en una única transacción.
-         *
-         * <p>
-         * Este método garantiza la atomicidad de la operación: se inserta
-         * primero el usuario en la base de datos, se obtiene su identificador
-         * generado y luego se inserta la credencial asociada con dicho ID como
-         * clave foránea. Si ambas operaciones se completan correctamente, se
-         * confirma la transacción con {@code commit()}. En caso de cualquier
-         * error, se ejecuta un {@code rollback()} para revertir todos los
-         * cambios y evitar datos inconsistentes.</p>
-         *
-         * <p>
-         * El autocommit de la conexión se desactiva temporalmente al inicio de
-         * la transacción y se restaura en el bloque {@code finally}, asegurando
-         * que la conexión vuelva a su estado original al finalizar la
-         * operación.</p>
-         *
-         * @param usuario objeto {@link Usuario} a persistir en la base de datos
-         * @param cred objeto {@link CredencialAcceso} asociado al usuario, con
-         * hash de contraseña y salt
-         * @return el identificador generado para el nuevo usuario
-         * @throws SQLException si ocurre un error en la inserción de usuario o
-         * credencial, o en las operaciones de commit/rollback
-         *
-         * @see java.sql.Connection#setAutoCommit(boolean)
-         * @see java.sql.Connection#commit()
-         * @see java.sql.Connection#rollback()
-         */
         Connection conn = null;
         boolean prevAutoCommit = true;
 
