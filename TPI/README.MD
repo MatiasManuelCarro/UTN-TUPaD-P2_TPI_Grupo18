@@ -48,17 +48,18 @@ Este proyecto busca simular un **sistema de autenticación básico**, aplicando 
 
 ## 🗄️ Pasos para configurar la base de datos
 
-#### 1. Crear la base de datos, podemos utilizar el script que se encuentra en:
+#### 1. Crear la base de datos, podes utilizar el script que se encuentra en: 
+
+> TPI\programacion2Base_de_datos_Grupo_18.sql
+
 <br>
 
 ```sql
-O ejecutar el siguiente Script en MySQL:
-
 DROP DATABASE IF EXISTS tpi_prog_2;
 CREATE DATABASE IF NOT EXISTS tpi_prog_2
 CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
-USE tpi_prog_2;	
+USE tpi_prog_2; 
 
 CREATE TABLE usuario (
 id_usuario INT NOT NULL AUTO_INCREMENT,
@@ -199,6 +200,33 @@ WHERE c.usuario_id IS NULL;
 
 
 /* ===========================================================
+ STORED PROCEDURE para actualizar password
+=========================================================== */
+DELIMITER //
+ 
+CREATE PROCEDURE sp_actualizar_password_seguro (
+    IN p_usuario_id INT,
+    IN p_nuevo_hash VARCHAR(255),
+    IN p_nuevo_salt VARCHAR(64)
+)
+BEGIN
+    -- Utiliza parámetros de entrada que son tratados como datos.
+    -- La consulta está predefinida y no se construye con concatenación de strings (NO ES SQL DINÁMICO).
+    UPDATE credencial_acceso
+    SET
+        hash_password = p_nuevo_hash,
+        salt = p_nuevo_salt,
+        ultimo_cambio = NOW(),
+        requiere_reset = FALSE
+    WHERE
+        usuario_id = p_usuario_id;
+        
+END //
+ 
+DELIMITER ;
+-- Limpiamos el delimitador
+
+/* ===========================================================
  INSERCIÓN DE USUARIOS
 =========================================================== */
 
@@ -217,6 +245,7 @@ VALUES
 (2, 0, 2, 'ACTIVO', NULL, '83de667011fdd37c72b91dfa80754634309ce7590b28e5b8103134bb9d4ce9f2', 'a88c6229e545981effb8516c821f0cc2', '2025-11-14 00:23:59', 0),
 (3, 0, 3, 'ACTIVO', NULL, 'b2b9d791185f19cf6df32ce9b8426583cd124b8272a9064f7c596515aeb34246', 'b2fe845062eae5cbcb78e726e5d66524', '2025-11-14 00:24:46', 0),
 (4, 0, 4, 'ACTIVO', NULL, 'a5fed4461e10a0bd3f283be1658fd1eb7712f15fa2ec792d89c3068345801e84', '125b28f83d02162dbd9fc432a6c69fc0', '2025-11-14 00:25:21', 0);
+
 
 ```
 
