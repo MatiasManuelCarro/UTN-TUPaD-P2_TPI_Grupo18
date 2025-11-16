@@ -12,12 +12,12 @@ import java.util.Optional;
 /**
  * Implementación del servicio de CredencialAcceso.
  *
- * En esta clase centralizo la lógica de "negocio" relacionada con las credenciales:
- * - Delego las operaciones CRUD al DAO.
- * - Aplico validaciones mínimas cuando corresponde (por ejemplo, al actualizar password).
+ * En esta clase centralizo la lógica de "negocio" relacionada con las
+ * credenciales: - Delego las operaciones CRUD al DAO. - Aplico validaciones
+ * mínimas cuando corresponde (por ejemplo, al actualizar password).
  *
- * La idea es que desde el menú o desde otras capas se hable con el Service
- * y no directamente con el DAO.
+ * La idea es que desde el menú o desde otras capas se hable con el Service y no
+ * directamente con el DAO.
  */
 public class CredencialAccesoServiceImpl implements CredencialAccesoService {
 
@@ -32,8 +32,8 @@ public class CredencialAccesoServiceImpl implements CredencialAccesoService {
     }
 
     /**
-     * Constructor alternativo: lo uso para inyectar un DAO "mock" en tests
-     * o para cambiar la implementación sin modificar el código de arriba.
+     * Constructor alternativo: lo uso para inyectar un DAO "mock" en tests o
+     * para cambiar la implementación sin modificar el código de arriba.
      */
     public CredencialAccesoServiceImpl(CredencialAccesoDao credencialDao) {
         this.credencialDao = credencialDao;
@@ -42,12 +42,31 @@ public class CredencialAccesoServiceImpl implements CredencialAccesoService {
     // ================================
     // CRUD genérico
     // ================================
-
     /**
      * Creo una nueva credencial delegando directamente en el DAO.
      */
+    //@Override
+    //public Long create(CredencialAcceso entity) throws SQLException {
+    //    return credencialDao.create(entity);
+    //}
+    /**
+     * Crea una nueva credencial de acceso para un usuario.
+     *
+     * @param entity la credencial a crear
+     * @return el ID generado de la credencial
+     * @throws IllegalArgumentException si el usuarioId es nulo
+     * @throws IllegalStateException si el usuario ya tiene una credencial
+     * asociada
+     * @throws SQLException si ocurre un error al acceder a la base de datos
+     */
     @Override
     public Long create(CredencialAcceso entity) throws SQLException {
+        if (entity.getUsuarioId() == null) {
+            throw new IllegalArgumentException("usuarioId es obligatorio");
+        }
+        if (credencialDao.findByUsuarioId(entity.getUsuarioId()).isPresent()) {
+            throw new IllegalStateException("El usuario ya tiene una credencial (Utilize mofidicar credencial");
+        }
         return credencialDao.create(entity);
     }
 
@@ -94,10 +113,9 @@ public class CredencialAccesoServiceImpl implements CredencialAccesoService {
     // ================================
     // Métodos específicos
     // ================================
-
     /**
-     * Busco una credencial a partir del ID de usuario.
-     * Esto lo uso en el login y en operaciones donde necesito la credencial asociada.
+     * Busco una credencial a partir del ID de usuario. Esto lo uso en el login
+     * y en operaciones donde necesito la credencial asociada.
      */
     @Override
     public Optional<CredencialAcceso> findByUsuarioId(Long usuarioId) throws SQLException {
@@ -105,19 +123,20 @@ public class CredencialAccesoServiceImpl implements CredencialAccesoService {
     }
 
     /**
-     * Actualizo la contraseña de forma segura:
-     * - Primero valido que el password no venga vacío.
-     * - Genero un salt aleatorio.
-     * - Calculo el hash usando SHA-256 + salt (PasswordUtil).
-     * - Delego en el DAO para que llame al stored procedure que actualiza la contraseña.
+     * Actualizo la contraseña de forma segura: - Primero valido que el password
+     * no venga vacío. - Genero un salt aleatorio. - Calculo el hash usando
+     * SHA-256 + salt (PasswordUtil). - Delego en el DAO para que llame al
+     * stored procedure que actualiza la contraseña.
      *
-     * El parámetro "ignorar" queda solo para respetar la firma acordada en la interfaz
-     * (por ejemplo, si en algún momento necesito pasar algo extra o para compatibilidad).
+     * El parámetro "ignorar" queda solo para respetar la firma acordada en la
+     * interfaz (por ejemplo, si en algún momento necesito pasar algo extra o
+     * para compatibilidad).
      */
     @Override
     public void updatePasswordSeguro(Long usuarioId, String nuevoPasswordPlano, String ignorar) throws SQLException {
-        if (nuevoPasswordPlano == null || nuevoPasswordPlano.isBlank())
+        if (nuevoPasswordPlano == null || nuevoPasswordPlano.isBlank()) {
             throw new IllegalArgumentException("El password no puede estar vacío");
+        }
 
         // Genero un salt nuevo para esta actualización
         String salt = integradorfinal.programacion2.util.PasswordUtil.generateSalt(16);
