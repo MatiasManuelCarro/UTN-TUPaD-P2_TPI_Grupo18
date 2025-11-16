@@ -143,6 +143,33 @@ WHERE c.usuario_id IS NULL;
 
 
 /* ===========================================================
+ STORED PROCEDURE para actualizar password
+=========================================================== */
+DELIMITER //
+ 
+CREATE PROCEDURE sp_actualizar_password_seguro (
+    IN p_usuario_id INT,
+    IN p_nuevo_hash VARCHAR(255),
+    IN p_nuevo_salt VARCHAR(64)
+)
+BEGIN
+    -- Utiliza parámetros de entrada que son tratados como datos.
+    -- La consulta está predefinida y no se construye con concatenación de strings (NO ES SQL DINÁMICO).
+    UPDATE credencial_acceso
+    SET
+        hash_password = p_nuevo_hash,
+        salt = p_nuevo_salt,
+        ultimo_cambio = NOW(),
+        requiere_reset = FALSE
+    WHERE
+        usuario_id = p_usuario_id;
+        
+END //
+ 
+DELIMITER ;
+-- Limpiamos el delimitador
+
+/* ===========================================================
  INSERCIÓN DE USUARIOS
 =========================================================== */
 
