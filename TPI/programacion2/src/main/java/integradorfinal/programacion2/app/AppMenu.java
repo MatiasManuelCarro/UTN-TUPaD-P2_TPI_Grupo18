@@ -288,7 +288,7 @@ public class AppMenu {
         u.setCredencial(c);
 
         Long nuevoId = usuarioService.createUsuarioConCredencial(u);
-        System.out.println("Transaccion OK. Usuario id=" + nuevoId + " + credencial creada.");
+        System.out.println("Usuario Creado. Usuario id = " + nuevoId + " + credencial creada.");
     }
 
     // ===================== CREDENCIAL =====================
