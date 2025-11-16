@@ -11,6 +11,9 @@ import java.sql.SQLException;
 public class Programacion2 {
 
     public static void testConnection() {
+        System.out.println("Recordar modificar el Archivo db.resources en src\\main\\resources "
+                + "para que la aplicacion conecte a la base de datos");
+        System.out.println("Para mas info, leer el README");
         System.out.println("Iniciando prueba de conexión...");
 
         try (Connection conn = DatabaseConnection.getConnection()) {
