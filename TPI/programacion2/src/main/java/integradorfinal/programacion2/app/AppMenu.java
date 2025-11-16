@@ -158,7 +158,7 @@ public class AppMenu {
     private void verUsuarioPorId() throws SQLException {
         long id = leerLong("ID de usuario");
         Optional<Usuario> u = usuarioService.findById(id);
-        System.out.println(u.map(Object::toString).orElse("(no encontrado)"));
+        System.out.println(u.map(Object::toString).orElse("Usuario no encontrado"));
     }
 
     /**
@@ -167,7 +167,7 @@ public class AppMenu {
     private void buscarUsuarioPorUsername() throws SQLException {
         String username = leerStr("Username");
         Optional<Usuario> u = usuarioService.findByUsername(username);
-        System.out.println(u.map(Object::toString).orElse("(no encontrado)"));
+        System.out.println(u.map(Object::toString).orElse("(Usuario no encontrado)"));
     }
 
     /**
@@ -176,7 +176,7 @@ public class AppMenu {
     private void buscarUsuarioPorEmail() throws SQLException {
         String email = leerStr("Email");
         Optional<Usuario> u = usuarioService.findByEmail(email);
-        System.out.println(u.map(Object::toString).orElse("(no encontrado)"));
+        System.out.println(u.map(Object::toString).orElse("(Usuario no encontrado)"));
     }
 
     /**
@@ -226,7 +226,7 @@ public class AppMenu {
         }
 
         usuarioService.update(u);
-        System.out.println("✅ Usuario actualizado.");
+        System.out.println("Usuario actualizado.");
     }
 
     /**

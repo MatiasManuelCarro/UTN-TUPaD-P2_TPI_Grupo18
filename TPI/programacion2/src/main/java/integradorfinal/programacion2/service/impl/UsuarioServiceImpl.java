@@ -40,57 +40,207 @@ public class UsuarioServiceImpl implements UsuarioService {
     // ================================
     // CRUD (delegan en DAO)
     // ================================
+    /**
+     * Crea un nuevo usuario en la base de datos.
+     *
+     * <p>
+     * Si la entidad no tiene fecha de registro o estado definidos, se asignan
+     * valores por defecto razonables:
+     * <ul>
+     * <li>Fecha de registro: {@link LocalDateTime#now()}</li>
+     * <li>Estado: {@link Estado#ACTIVO}</li>
+     * </ul>
+     * </p>
+     *
+     * @param entity el usuario a crear
+     * @return el ID generado para el nuevo usuario
+     * @throws SQLException si ocurre un error al guardar el usuario en la base
+     * de datos
+     */
     @Override
     public Long create(Usuario entity) throws SQLException {
-        // Si viene sin fecha/estado, default razonables
+        // Defaults razonables
         if (entity.getFechaRegistro() == null) {
             entity.setFechaRegistro(LocalDateTime.now());
         }
         if (entity.getEstado() == null) {
             entity.setEstado(Estado.ACTIVO);
         }
-        return usuarioDao.create(entity);
+
+        try {
+            return usuarioDao.create(entity);
+        } catch (SQLException e) {
+            //SQLException con un mensaje más claro
+            throw new SQLException("Error al crear el usuario con username = "
+                    + entity.getUsername(), e);
+        }
     }
 
+    /**
+     * Busca un usuario en la base de datos a partir de su ID.
+     *
+     * <p>
+     * Este método delega la consulta al DAO correspondiente y devuelve un
+     * {@link Optional} con el usuario si existe. Si ocurre un error de acceso a
+     * datos, se lanza una {@link SQLException} con un mensaje descriptivo.</p>
+     *
+     * @param id identificador del usuario a buscar
+     * @return un {@link Optional} con el usuario si existe; vacío si no se
+     * encuentra
+     * @throws SQLException si ocurre un error al acceder a la base de datos
+     */
     @Override
     public Optional<Usuario> findById(Long id) throws SQLException {
-        return usuarioDao.findById(id);
+        try {
+            return usuarioDao.findById(id);
+        } catch (SQLException e) {
+            //SQLException con un mensaje más claro
+            throw new SQLException("Error al buscar el usuario con id = " + id, e);
+        }
     }
 
+    /**
+     * Obtiene todos los usuarios que no estén marcados como eliminados.
+     *
+     * <p>
+     * Este método consulta la base de datos a través del DAO y devuelve una
+     * lista de usuarios activos. Si ocurre un error de acceso a datos, se lanza
+     * una {@link SQLException} con un mensaje descriptivo.</p>
+     *
+     * @return una lista de usuarios activos (no eliminados). Si no hay
+     * registros, la lista estará vacía.
+     * @throws SQLException si ocurre un error al acceder a la base de datos
+     */
     @Override
     public List<Usuario> findAll() throws SQLException {
-        return usuarioDao.findAll();
+        try {
+            return usuarioDao.findAll();
+        } catch (SQLException e) {
+            //SQLException con un mensaje más claro
+            throw new SQLException("Error al listar los usuarios.", e);
+        }
     }
 
+    /**
+     * Actualiza un usuario existente en la base de datos.
+     *
+     * <p>
+     * Si el usuario no tiene definido un estado, se asigna por defecto
+     * {@link Estado#ACTIVO}. Luego se delega la actualización al DAO.</p>
+     *
+     * @param entity el usuario con los datos actualizados
+     * @throws SQLException si ocurre un error al actualizar el usuario en la
+     * base de datos
+     */
     @Override
     public void update(Usuario entity) throws SQLException {
         if (entity.getEstado() == null) {
             entity.setEstado(Estado.ACTIVO);
         }
-        usuarioDao.update(entity);
+
+        try {
+            usuarioDao.update(entity);
+        } catch (SQLException e) {
+            //SQLException con un mensaje más claro
+            throw new SQLException("Error al actualizar el usuario con id = "
+                    + entity.getIdUsuario(), e);
+        }
     }
 
+    /**
+     * Realiza la baja lógica de un usuario en la base de datos.
+     *
+     * <p>
+     * Este método marca al usuario como eliminado (eliminado = TRUE), sin
+     * borrar físicamente el registro. La operación se delega al DAO. Si ocurre
+     * un error de acceso a datos, se lanza una {@link SQLException} con un
+     * mensaje descriptivo.</p>
+     *
+     * @param id identificador del usuario a dar de baja lógicamente
+     * @throws SQLException si ocurre un error al marcar el usuario como
+     * eliminado
+     */
     @Override
     public void softDeleteById(Long id) throws SQLException {
-        usuarioDao.softDeleteById(id);
+        try {
+            usuarioDao.softDeleteById(id);
+        } catch (SQLException e) {
+            //SQLException con un mensaje más claro
+            throw new SQLException("Error al realizar la baja lógica del usuario con id = " + id, e);
+        }
     }
 
+    /**
+     * Elimina físicamente un usuario de la base de datos.
+     *
+     * <p>
+     * Este método borra el registro del usuario asociado al identificador
+     * indicado. A diferencia de la baja lógica, aquí el registro se elimina de
+     * forma definitiva. Si ocurre un error de acceso a datos, se lanza una
+     * {@link SQLException} con un mensaje descriptivo.</p>
+     *
+     * @param id identificador del usuario a eliminar
+     * @throws SQLException si ocurre un error al eliminar el usuario de la base
+     * de datos
+     */
     @Override
     public void deleteById(Long id) throws SQLException {
-        usuarioDao.deleteById(id);
+        try {
+            usuarioDao.deleteById(id);
+        } catch (SQLException e) {
+            // Re-lanzamos la SQLException con un mensaje más claro
+            throw new SQLException("Error al eliminar físicamente el usuario con id = " + id, e);
+        }
     }
 
     // ================================
     // Métodos específicos
     // ================================
+    /**
+     * Busca un usuario en la base de datos a partir de su nombre de usuario
+     * (username).
+     *
+     * <p>
+     * Este método delega la consulta al DAO correspondiente y devuelve un
+     * {@link Optional} con el usuario si existe. Si ocurre un error de acceso a
+     * datos, se lanza una {@link SQLException} con un mensaje descriptivo.</p>
+     *
+     * @param username nombre de usuario a buscar
+     * @return un {@link Optional} con el usuario si existe; vacío si no se
+     * encuentra
+     * @throws SQLException si ocurre un error al acceder a la base de datos
+     */
     @Override
     public Optional<Usuario> findByUsername(String username) throws SQLException {
-        return usuarioDao.findByUsername(username);
+        try {
+            return usuarioDao.findByUsername(username);
+        } catch (SQLException e) {
+            // SQLException con un mensaje más claro
+            throw new SQLException("Error al buscar el usuario con usernam = " + username, e);
+        }
     }
 
+    /**
+     * Busca un usuario en la base de datos a partir de su correo electrónico.
+     *
+     * <p>
+     * Este método delega la consulta al DAO correspondiente y devuelve un
+     * {@link Optional} con el usuario si existe. Si ocurre un error de acceso a
+     * datos, se lanza una {@link SQLException} con un mensaje descriptivo.</p>
+     *
+     * @param email correo electrónico del usuario a buscar
+     * @return un {@link Optional} con el usuario si existe; vacío si no se
+     * encuentra
+     * @throws SQLException si ocurre un error al acceder a la base de datos
+     */
     @Override
     public Optional<Usuario> findByEmail(String email) throws SQLException {
-        return usuarioDao.findByEmail(email);
+        try {
+            return usuarioDao.findByEmail(email);
+        } catch (SQLException e) {
+            // SQLException con un mensaje más claro
+            throw new SQLException("Error al buscar el usuario con email = " + email, e);
+        }
     }
 
     /**

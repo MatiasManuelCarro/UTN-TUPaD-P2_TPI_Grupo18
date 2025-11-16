@@ -65,7 +65,7 @@ public class CredencialAccesoServiceImpl implements CredencialAccesoService {
             throw new IllegalArgumentException("usuarioId es obligatorio");
         }
         if (credencialDao.findByUsuarioId(entity.getUsuarioId()).isPresent()) {
-            throw new IllegalStateException("El usuario ya tiene una credencial (Utilize mofidicar credencial");
+            throw new IllegalStateException("El usuario ya tiene una credencial (Utilize modificar credencial)");
         }
         return credencialDao.create(entity);
     }
@@ -73,64 +73,171 @@ public class CredencialAccesoServiceImpl implements CredencialAccesoService {
     /**
      * Busco una credencial por su ID.
      */
+    //@Override
+    //public Optional<CredencialAcceso> findById(Long id) throws SQLException {
+    //    return credencialDao.findById(id);
+    //}
+    /**
+     * Busca una credencial por su ID.
+     *
+     * @param id identificador de la credencial
+     * @return Optional con la credencial si existe
+     * @throws SQLException si ocurre un error al acceder a la base de datos
+     */
     @Override
     public Optional<CredencialAcceso> findById(Long id) throws SQLException {
-        return credencialDao.findById(id);
+        try {
+            return credencialDao.findById(id);
+        } catch (SQLException e) {
+            // SQLException pero con un mensaje más amigable
+            throw new SQLException("Error al buscar la credencial con id=" + id, e);
+        }
     }
 
     /**
-     * Listo todas las credenciales no eliminadas.
+     * Obtiene todas las credenciales de acceso que no estén marcadas como
+     * eliminadas.
+     *
+     * <p>
+     * Este método consulta la base de datos a través del DAO y devuelve una
+     * lista de credenciales activas. Si ocurre un error de acceso a datos, se
+     * lanza una {@link SQLException} con un mensaje descriptivo.</p>
+     *
+     * @return una lista de credenciales activas (no eliminadas). Si no hay
+     * registros, la lista estará vacía.
+     * @throws SQLException si ocurre un error al acceder a la base de datos
      */
     @Override
     public List<CredencialAcceso> findAll() throws SQLException {
-        return credencialDao.findAll();
+        try {
+            return credencialDao.findAll();
+        } catch (SQLException e) {
+            throw new SQLException("Error al listar las credenciales de acceso.", e);
+        }
     }
 
     /**
-     * Actualizo una credencial existente.
+     * Actualiza una credencial existente en la base de datos.
+     *
+     * <p>
+     * Este método recibe una entidad {@link CredencialAcceso} y delega la
+     * actualización al DAO correspondiente. Si ocurre un error de acceso a
+     * datos, se lanza una {@link SQLException} con un mensaje descriptivo.</p>
+     *
+     * @param entity la credencial con los datos actualizados
+     * @throws SQLException si ocurre un error al actualizar la credencial en la
+     * base de datos
      */
     @Override
     public void update(CredencialAcceso entity) throws SQLException {
-        credencialDao.update(entity);
+        try {
+            credencialDao.update(entity);
+        } catch (SQLException e) {
+            // SQLException con un mensaje más claro
+            throw new SQLException("Error al actualizar la credencial con id="
+                    + entity.getIdCredencial(), e);
+        }
     }
 
     /**
-     * Realizo baja lógica de una credencial (marco eliminado = TRUE).
+     * Realiza la baja lógica de una credencial de acceso.
+     *
+     * <p>
+     * Este método marca la credencial como eliminada (eliminado = TRUE) en la
+     * base de datos, sin borrar físicamente el registro. Si ocurre un error de
+     * acceso a datos, se lanza una {@link SQLException} con un mensaje
+     * descriptivo.</p>
+     *
+     * @param id identificador de la credencial a dar de baja
+     * @throws SQLException si ocurre un error al marcar la credencial como
+     * eliminada
      */
     @Override
     public void softDeleteById(Long id) throws SQLException {
-        credencialDao.softDeleteById(id);
+        try {
+            credencialDao.softDeleteById(id);
+        } catch (SQLException e) {
+            // SQLException con un mensaje más claro
+            throw new SQLException("Error al realizar la baja lógica de la credencial con id=" + id, e);
+        }
     }
 
     /**
-     * Realizo baja física de una credencial (DELETE).
+     * Elimina físicamente una credencial de acceso de la base de datos.
+     *
+     * <p>
+     * Este método borra el registro de credencial asociado al identificador
+     * indicado. A diferencia de la baja lógica, aquí el registro se elimina de
+     * forma definitiva. Si ocurre un error de acceso a datos, se lanza una
+     * {@link SQLException} con un mensaje descriptivo.</p>
+     *
+     * @param id identificador de la credencial a eliminar
+     * @throws SQLException si ocurre un error al eliminar la credencial de la
+     * base de datos
      */
     @Override
     public void deleteById(Long id) throws SQLException {
-        credencialDao.deleteById(id);
+        try {
+            credencialDao.deleteById(id);
+        } catch (SQLException e) {
+            // SQLException con un mensaje más claro
+            throw new SQLException("Error al eliminar físicamente la credencial con id=" + id, e);
+        }
     }
 
     // ================================
     // Métodos específicos
     // ================================
     /**
-     * Busco una credencial a partir del ID de usuario. Esto lo uso en el login
-     * y en operaciones donde necesito la credencial asociada.
+     * Busca la credencial asociada a un usuario a partir de su ID.
+     *
+     * <p>
+     * Este método se utiliza en el login y en operaciones donde es necesario
+     * obtener la credencial vinculada a un usuario. Si ocurre un error de
+     * acceso a datos, se lanza una {@link SQLException} con un mensaje
+     * descriptivo.</p>
+     *
+     * @param usuarioId identificador del usuario dueño de la credencial
+     * @return un {@link Optional} con la credencial si existe; vacío si no se
+     * encuentra
+     * @throws SQLException si ocurre un error al acceder a la base de datos
      */
     @Override
     public Optional<CredencialAcceso> findByUsuarioId(Long usuarioId) throws SQLException {
-        return credencialDao.findByUsuarioId(usuarioId);
+        try {
+            return credencialDao.findByUsuarioId(usuarioId);
+        } catch (SQLException e) {
+            // SQLException con un mensaje más claro
+            throw new SQLException("Error al buscar la credencial asociada al usuario con id="
+                    + usuarioId, e);
+        }
     }
 
     /**
-     * Actualizo la contraseña de forma segura: - Primero valido que el password
-     * no venga vacío. - Genero un salt aleatorio. - Calculo el hash usando
-     * SHA-256 + salt (PasswordUtil). - Delego en el DAO para que llame al
-     * stored procedure que actualiza la contraseña.
+     * Actualiza la contraseña de un usuario de forma segura.
      *
-     * El parámetro "ignorar" queda solo para respetar la firma acordada en la
-     * interfaz (por ejemplo, si en algún momento necesito pasar algo extra o
-     * para compatibilidad).
+     * <p>
+     * El proceso incluye:
+     * <ul>
+     * <li>Validar que el nuevo password no esté vacío.</li>
+     * <li>Generar un salt aleatorio.</li>
+     * <li>Calcular el hash usando SHA-256 + salt mediante
+     * {@link PasswordUtil}.</li>
+     * <li>Delegar en el DAO para que ejecute el stored procedure que actualiza
+     * la contraseña.</li>
+     * </ul>
+     * </p>
+     *
+     * @param usuarioId identificador del usuario cuya credencial se va a
+     * actualizar
+     * @param nuevoPasswordPlano contraseña en texto plano que será validada,
+     * salteada y hasheada
+     * @param ignorar parámetro reservado para compatibilidad con la interfaz;
+     * actualmente no se utiliza
+     * @throws IllegalArgumentException si el nuevo password es nulo o está
+     * vacío
+     * @throws SQLException si ocurre un error al actualizar la contraseña en la
+     * base de datos
      */
     @Override
     public void updatePasswordSeguro(Long usuarioId, String nuevoPasswordPlano, String ignorar) throws SQLException {
