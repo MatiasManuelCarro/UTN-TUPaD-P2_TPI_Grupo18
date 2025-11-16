@@ -48,8 +48,22 @@ public class Usuario {
     public Usuario() {}
 
     /**
-     * Constructor completo: lo uso cuando ya conozco todos los campos.
-     */
+ * Constructor completo de la entidad {@link Usuario}.
+ *
+ * <p>Se utiliza cuando ya se conocen todos los campos del usuario,
+ * por ejemplo al reconstruir la entidad desde la base de datos o
+ * al inicializar un objeto con información completa.</p>
+ *
+ * @param idUsuario identificador único del usuario (PK en la base de datos)
+ * @param eliminado indica si el usuario está marcado como eliminado (baja lógica)
+ * @param username nombre de usuario único para login y autenticación
+ * @param nombre nombre real del usuario
+ * @param apellido apellido del usuario
+ * @param email correo electrónico único del usuario
+ * @param fechaRegistro fecha y hora en que se registró el usuario
+ * @param activo bandera booleana que indica si el usuario está activo (true) o inactivo (false)
+ * @param estado estado del usuario según catálogo ({@link Estado#ACTIVO}, {@link Estado#INACTIVO})
+ */
     public Usuario(Long idUsuario, boolean eliminado, String username,
                    String nombre, String apellido, String email,
                    LocalDateTime fechaRegistro, boolean activo, Estado estado) {
@@ -101,8 +115,8 @@ public class Usuario {
     // --- toString ---
 
     /**
-     * Mantengo este toString lo más limpio posible y sin datos sensibles.
-     * Así puedo imprimir usuarios en consola sin mostrar emails completos,
+     * toString lo más limpio posible y sin datos sensibles.
+     * Así se  puede imprimir usuarios en consola sin mostrar emails completos,
      * contraseñas, etc.
      */
     @Override
