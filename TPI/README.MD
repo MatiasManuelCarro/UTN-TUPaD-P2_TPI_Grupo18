@@ -378,15 +378,15 @@ Ambas deben tener la ubicacion de la carpeta descomprimida de Maven (Por ejemplo
 
 > MAVEN_HOME
 
-En esta debe estar la ubicacion de la carpeta .bin dentro de maven (Por ejemplo: C\\:apache-maven-3.9.11.bin)
+En esta tambien debe tener la ubicacion de la carpeta descomprimida de Maven (Por ejemplo: C\\:apache-maven-3.9.11)
 
 4. ir a Path dentro de variables del sistema y crear uno nuevo. 
 
-Con la ubicacion de la carpeta Maven (Por ejemplo: C\\:apache-maven-3.9.11 )
+Con la ubicacion de la carpeta Maven\bin (Por ejemplo: C\\:apache-maven-3.9.11\bin )
 
 ### Nota: guias de como hacerlos se encuentran en la Carpeta Extras del repositorio
 
-https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/Extras
+https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/blob/main/TPI/Extras/CONFIGURAR_MAVEN.png
 
 
 ---
