@@ -355,7 +355,7 @@ Las credenciales: 12345
 
 ---
 
-## Antes de ejecutar:
+## Antes de Compilar:
 
 - Verificar tener las configuracion correctas:
 - Maven funcionando
