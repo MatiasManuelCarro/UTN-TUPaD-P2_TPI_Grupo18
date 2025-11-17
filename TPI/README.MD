@@ -33,13 +33,13 @@ Este proyecto busca simular un **sistema de autenticación básico**, aplicando 
 
 ---
 
-## Link al video del proyecto:
+## 📹 Link al video del proyecto:
 
 https://www.youtube.com/watch?v=JzoYeIVNUH0
 
 ---
 
-## Diagrama UML del proyecto:
+## 📈 Diagrama UML del proyecto:
 
 - El diagrama se encuentra en: 
 
@@ -410,7 +410,7 @@ https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/Extr
 
 --- 
 
-## Compilar el Proyecto
+## 🔧 Compilar el Proyecto
 
 ### Windows
 ```
@@ -481,7 +481,7 @@ y ejecutar:
 ---
 
 
-## Uso del Sistema
+## 📃 Uso del Sistema
 
 ### Menú Principal
 
@@ -741,7 +741,7 @@ Configurar correctamente los archivos db.resource
 
 - Da error de UTF-8 
 
-Configuar correctamente la variable del entorno para UTF
+Configurar correctamente la variable del entorno para UTF
 
 - No funciona correctamente maven (o la consola no reconoce el comando mvn)
 
@@ -755,7 +755,7 @@ https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/Extr
 ---
 
 
-### Estructura en Capas
+### 📁 Estructura en Capas
 
 ```
 ┌─────────────────────────────────────┐
@@ -786,7 +786,7 @@ https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/Extr
 └─────────────────────────────────────┘
 ```
 
-# Componentes Principales
+# 💾 Componentes Principales
 
 ## Config/
 - **Config.java**: Clase de configuración general de la aplicación.
@@ -827,7 +827,7 @@ https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/Extr
 
 ---
 
-## Estructura de Directorios
+## 📂 Estructura de Directorios
 
 
 ```
@@ -890,7 +890,7 @@ TPI-Prog2-fusion-final/
 ---
 
 
-## Javadoc
+## ✏️ Javadoc
 
 - Se encuentra dentro de la carpeta docs
 
