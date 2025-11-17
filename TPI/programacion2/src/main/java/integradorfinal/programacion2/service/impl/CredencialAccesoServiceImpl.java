@@ -65,7 +65,7 @@ public class CredencialAccesoServiceImpl implements CredencialAccesoService {
             throw new IllegalArgumentException("usuarioId es obligatorio");
         }
         if (credencialDao.findByUsuarioId(entity.getUsuarioId()).isPresent()) {
-            throw new IllegalStateException("El usuario ya tiene una credencial (Utilize modificar credencial)");
+            throw new IllegalStateException("El usuario ya tiene una credencial (Utilize Actualizar contraseña)");
         }
         return credencialDao.create(entity);
     }
