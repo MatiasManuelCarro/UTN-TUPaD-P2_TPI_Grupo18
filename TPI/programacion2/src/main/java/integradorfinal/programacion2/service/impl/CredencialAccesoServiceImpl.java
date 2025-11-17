@@ -31,10 +31,7 @@ public class CredencialAccesoServiceImpl implements CredencialAccesoService {
         this.credencialDao = new CredencialAccesoDaoImpl();
     }
 
-    /**
-     * Constructor alternativo: lo uso para inyectar un DAO "mock" en tests o
-     * para cambiar la implementación sin modificar el código de arriba.
-     */
+
     public CredencialAccesoServiceImpl(CredencialAccesoDao credencialDao) {
         this.credencialDao = credencialDao;
     }

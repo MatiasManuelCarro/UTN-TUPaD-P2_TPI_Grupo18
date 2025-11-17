@@ -277,10 +277,8 @@ public class AppMenu {
         CredencialAcceso c = new CredencialAcceso();
         c.setEliminado(false);
         c.setEstado(Estado.ACTIVO);
-        // En esta opción transaccional dejo el password tal cual lo ingresa el usuario
-        // asumiendo que el hash se aplica en otra capa o es solo demostrativo.
         c.setHashPassword(leerStr("Password (se guardara el hash SHA-256)"));
-        c.setSalt("manual"); // acá setteo un salt fijo solo a modo de ejemplo
+        c.setSalt("manual"); // salt fijo solo a modo de ejemplo
         c.setUltimoCambio(LocalDateTime.now());
         c.setRequiereReset(false);
         // El usuarioService se encarga luego de persistir Usuario y Credencial

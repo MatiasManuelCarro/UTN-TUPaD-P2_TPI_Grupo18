@@ -417,7 +417,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             Long idUsuario = usuarioDao.create(u, conn);
             System.out.println("Usuario demo creado con ID (sin commit): " + idUsuario);
 
-            // 💣 2) ERROR FORZADO para demostrar rollback
+            // 2) ERROR FORZADO para demostrar rollback
             throw new SQLException("Error simulado para demostrar ROLLBACK");
 
             // 3) (Nunca llega acá)
