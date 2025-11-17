@@ -35,7 +35,9 @@ Este proyecto busca simular un **sistema de autenticación básico**, aplicando 
 
 ## Diagrama UML del proyecto:
 
+- El diagrama se encuentra en: 
 
+https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/blob/main/TPI/UML.png
 
 ---
 
