@@ -52,7 +52,7 @@ public final class Config {
     public static final String DB_PORT   = props.getProperty("db.port", "3306");
     public static final String DB_NAME   = props.getProperty("db.name", "tpi_prog_2");
     public static final String DB_USER   = props.getProperty("jdbc.user", "root");
-    public static final String DB_PASS   = props.getProperty("jdbc.pass", "1234");
+    public static final String DB_PASS   = props.getProperty("jdbc.pass");
     public static final String DB_DRIVER = props.getProperty("db.driver", "com.mysql.cj.jdbc.Driver");
 
     /**
