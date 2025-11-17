@@ -278,6 +278,25 @@ nota: Los usuarios por defecto tienen la clave "12345" para realizar pruebas
 
 #### Esta configuracion es para la conexion desde NetBeans o cualquier IDE
 
+##### Para cambiar la configuración (coneccion de la base de datos) ir dentro del proyecto a:
+
+src/main/resources y modificar el archivo "db.properties"
+
+> \src\main\resources\db.properties
+
+https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/programacion2/src/main/resources
+
+
+#### Tambien el que se encuentra dentro de target
+
+> target\classes\db.properties
+
+Y modificar el archivo de la misma manera.
+
+> https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/programacion2/target/classes
+
+
+
 - Este archivo permite cambiar la configuracion de la conexion con la base de datos, sin modificar codigo.
 
 - “Definir variables de entorno DB_USER y DB_PASS antes de ejecutar”.
@@ -285,26 +304,26 @@ nota: Los usuarios por defecto tienen la clave "12345" para realizar pruebas
 <br>
 
 ```
-> ****************************
-> CONFIGURACION BASE DE DATOS
-> ****************************
+# ------------------------------
+# CONFIGURACION BASE DE DATOS
+# ------------------------------
 
-> Host del servidor MySQL (ej: 127.0.0.1 o localhost)
-> db.host=127.0.0.1
+# Host del servidor MySQL (ej: 127.0.0.1 o localhost)
+db.host=127.0.0.1
 
-> Puerto del servidor MySQL (por defecto 3306)
-> db.port=3306
+# Puerto del servidor MySQL (por defecto 3306)
+db.port=3306
 
-> Nombre de la conexion / base de datos
-> db.name=tpi_prog_2
+# Nombre de la conexion / base de datos
+db.name=tpi_prog_2
 
-> Usuario y contrase\u00f1a
-> jdbc.user={DB_USER}
-> jdbc.pass={DB_PASS}
+# Usuario y contraseña
+jdbc.user=root
+jdbc.pass=
 
+# Driver JDBC de MySQL
+db.driver=com.mysql.cj.jdbc.Driver
 
-> Driver JDBC de MySQL
-> db.driver=com.mysql.cj.jdbc.Driver
 ```
 
 ## 🔨 Cómo Ejecutar
@@ -341,6 +360,7 @@ Las credenciales: 12345
 - Verificar tener las configuracion correctas:
 - Maven funcionando
 - UTF 8 configurado 
+- db.resources configurado
 
 ### Como configurar Maven
 
@@ -409,44 +429,8 @@ Por defecto conecta a:
     Usuario: root
     Contraseña: (vacía)
 
-##### Para cambiar la configuración (coneccion de la base de datos) ir dentro del proyecto a:
 
-src/main/resources y modificar el archivo "db.properties"
-
-https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/programacion2/src/main/resources
-
-- Esto cambia la conexion para correr el programa desde NetBeans (o cualquier otra IDE)
-
-> \src\main\resources\db.properties
-
-    ------------------------------
-    CONFIGURACION BASE DE DATOS
-    ------------------------------
-    
-    Host del servidor MySQL (ej: 127.0.0.1 o localhost)
-    db.host=127.0.0.1
-    
-    Puerto del servidor MySQL (por defecto 3306)
-    db.port=3306
-    
-    Nombre de la conexion / base de datos
-    db.name=tpi_prog_2
-    
-    Usuario y contrase\u00f1a
-    jdbc.user=root
-    jdbc.pass=****
-    
-    Driver JDBC de MySQL
-    db.driver=com.mysql.cj.jdbc.Driver
-
-
-#### Para compilar, se debe configurar el db.resourses que se encuentra en target
-
-> https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/programacion2/target/classes
-
-> target\classes\db.properties
-
-Y modificar el archivo de la misma manera.
+- Recorda configurar db.resources para poder conectar
 
 ---
 
@@ -746,6 +730,30 @@ La operación falló y se revirtió completamente.
 Al final, podes verificar que la transaccion falló y ningun usuario se creo. 
 
 ---
+
+## Posibles errores y solucion:
+
+####
+
+- No conecta a la Base de Datos.
+
+Configurar correctamente los archivos db.resource
+
+- Da error de UTF-8 
+
+Configuar correctamente la variable del entorno para UTF
+
+- No funciona correctamente maven (o la consola no reconoce el comando mvn)
+
+Configurar correctamente las variables del entorno de Maven y el Path
+
+Mas info en:
+
+https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/Extras
+
+
+---
+
 
 ### Estructura en Capas
 
