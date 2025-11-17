@@ -33,6 +33,12 @@ Este proyecto busca simular un **sistema de autenticación básico**, aplicando 
 
 ---
 
+## Diagrama UML del proyecto:
+
+
+
+---
+
 ## ⚙️ Requisitos del Sistema
 
 - **Java JDK 17** o superior.
@@ -48,7 +54,7 @@ Este proyecto busca simular un **sistema de autenticación básico**, aplicando 
 
 ## 🗄️ Pasos para configurar la base de datos
 
-#### 1. Crear la base de datos, podes utilizar el script que se encuentra en: 
+### 1. Crear la base de datos, podes utilizar el script que se encuentra en: 
 
 > TPI\programacion2Base_de_datos_Grupo_18.sql
 
@@ -250,11 +256,13 @@ VALUES
 ```
 
 
-#### 2. Agregar los usuarios de prueba (💻 Los integrantes del grupo 💻) 
+### 2. Agregar los usuarios de prueba (💻 Los integrantes del grupo 💻) 
 nota: Los usuarios por defecto tienen la clave "12345" para realizar pruebas
 <br>
 
-#### 3. Modificar el archivo db.properties que se encuentra en src/main/resources/ (src/main/resources/db.properties dentro de proyecto)
+### 3. Modificar el archivo db.properties que se encuentra en src/main/resources/ (src/main/resources/db.properties dentro de proyecto)
+
+#### Esta configuracion es para la conexion desde NetBeans o cualquier IDE
 
 - Este archivo permite cambiar la configuracion de la conexion con la base de datos, sin modificar codigo.
 
@@ -342,6 +350,11 @@ En esta debe estar la ubicacion de la carpeta .bin dentro de maven (Por ejemplo:
 
 Con la ubicacion de la carpeta Maven (Por ejemplo: C\\:apache-maven-3.9.11 )
 
+### Nota: guias de como hacerlos se encuentran en la Carpeta Extras del repositorio
+
+https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/Extras
+
+
 ---
 
 ### Como configurar UTF-8 en java (Se encuentra una guia con imagenes en la carpeta Extras del repo)
@@ -356,6 +369,11 @@ Con la ubicacion de la carpeta Maven (Por ejemplo: C\\:apache-maven-3.9.11 )
 -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -Dconsole.encoding=UTF-8
 ```
 
+### Nota: guias de como hacerlos se encuentran en la Carpeta Extras del repositorio
+
+https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/Extras
+
+
 --- 
 
 ## Compilar el Proyecto
@@ -369,6 +387,7 @@ mvn clean package
 
 3. Configurar Conexión 
 
+
 Por defecto conecta a:
 
     Host: localhost:3306
@@ -376,9 +395,13 @@ Por defecto conecta a:
     Usuario: root
     Contraseña: (vacía)
 
-- Para cambiar la configuración (en el uso del proyecto ) ir dentro del proyecto a:
+##### Para cambiar la configuración (coneccion de la base de datos) ir dentro del proyecto a:
 
 src/main/resources y modificar el archivo "db.properties"
+
+https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/programacion2/src/main/resources
+
+- Esto cambia la conexion para correr el programa desde NetBeans (o cualquier otra IDE)
 
 > \src\main\resources\db.properties
 
@@ -403,11 +426,13 @@ src/main/resources y modificar el archivo "db.properties"
     db.driver=com.mysql.cj.jdbc.Driver
 
 
-- Para cambiar la configuracion y ejecutar el proyecto compilado ir a:
+#### Para compilar, se debe configurar el db.resourses que se encuentra en target
+
+> https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/programacion2/target/classes
 
 > target\classes\db.properties
 
-Y modificar el archivo de la misma manera
+Y modificar el archivo de la misma manera.
 
 ---
 
@@ -420,6 +445,8 @@ Y modificar el archivo de la misma manera
 ```
 
 ### Opción 2: Desde la linea de comandos
+
+- De esta manera compila, recorda configurar los db.resources
 
 Desde la carpeta root del proyecto se puede ejecutar el siguiente Script
 (Requiere Maven instalado)
@@ -838,6 +865,18 @@ TPI-Prog2-fusion-final/
     └── JDK 24 (Default)                             # Con compatibilidad a partir de 17
 ```
 
+---
+
+
+## Javadoc
+
+- Se encuentra dentro de la carpeta docs
+
+> TPI\programacion2\doc
+
+- Abrir index.html
+
+https://github.com/MatiasManuelCarro/UTN-TUPaD-P2_TPI_Grupo18/tree/main/TPI/programacion2/doc
 
 ---
 **Versión**: 1.0
